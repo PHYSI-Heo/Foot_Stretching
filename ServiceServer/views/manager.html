@@ -15,78 +15,184 @@
   <div class="content">
     <!-- Access Manager -->
     <div>
-      <h5>Manager ID : </h5>
-      <input type="text" name="">
-      <h5>Password : </h5>
-      <input type="text" name="">
-      <input type="button" name="" value="Access">
+      <h5 class="title">Access Permission</h5>
+      <p>Manager ID : </p>
+      <input class="inputTxt tab_left" type="text" name="">
+      <p>Password : </p>
+      <input class="inputTxt tab_left" type="text" name="">
+      <input class="btn" type="button" name="" value="Access">
     </div>
 
     <!-- line -->
-    <hr></hr>
+    <div class="division_line vertical_margin12"></div>
 
     <!-- Setup Pattern -->
     <div>
+      <h5 class="title">Moving Pattern Setup</h5>
       <!-- illness -->
       <div>
+        <p class="tab_small_left">Illness Selector : </p>
         <select>
           <option>option1</option>
           <option>option2</option>
         </select>
-        <input type="text" name="">
-        <input type="button" name="" value="Add">
+        <input class="inputTxt tab_left" type="text" name="">
+        <input class="btn" type="button" name="" value="Add">
       </div>  
 
       <!-- pattern -->
-      <div >
+      <div>
+        <p class="tab_small_left">Pattern Selector : </p>
         <select>
           <option>pattern1</option>
           <option>pattern2</option>
         </select>
-        <input type="text" name="">
-        <input type="button" name="" value="Add">
+        <input class="inputTxt tab_left" type="text" name="">
+        <input class="btn" type="button" name="" value="Add">
       </div>   
 
       <!-- line -->
-      <hr></hr>
-      <!-- pattern list -->
-      <div>
+      <div class="division_line top_margin12"></div>
+
+      <!-- pattern setup -->
+      <div>       
+        <div class="table_col_botline">
+          <div class="half_width" style="border-right: 1px solid lightgrey;"><p class="center_text">Left</p></div>
+          <div class="half_width"><p class="center_text">Right</p></div>
+          <div class="clear"></div>
+        </div>
+
         <table>
-        <!-- <colgroup>
-          <col/>
-        </colgroup> -->
-        <thead>
-          <tr>
-            <!-- left -->
-            <th>상/하</th>
-            <th>기울기</th>
-            <th>좌/우</th>
-            <th>기울기</th>
-            <th>복귀</th>
-            <th>이동</th>
-            <th>유지</th>
-            <!-- right -->
-            <th>상/하</th>
-            <th>기울기</th>
-            <th>좌/우</th>
-            <th>기울기</th>
-            <th>복귀</th>
-            <th>이동</th>
-            <th>유지</th>
-          </tr>
-        </thead>
-        <tbody>
-          <!-- pattern rows -->
-        </tbody>
-      </table>
-    </div>
+          <thead>
+            <tr>
+              <!-- left -->
+              <th>상/하</th>
+              <th>각도</th>
+              <th>좌/우</th>
+              <th>각도</th>
+              <th>복귀</th>
+              <th>이동</th>
+              <th>유지</th>
+              <!-- right -->
+              <th>상/하</th>
+              <th>각도</th>
+              <th>좌/우</th>
+              <th>각도</th>
+              <th>복귀</th>
+              <th>이동</th>
+              <th>유지</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- pattern rows -->
+            <tr>
+              <!-- left -->
+              <td>
+                <input type="checkbox" name="" value="" >
+                <input type="checkbox" name="" value="" >
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input type="checkbox" name="" value="" >
+                <input type="checkbox" name="" value="" >
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <!-- right -->
+              <td>
+                <input type="checkbox" name="" value="" >
+                <input type="checkbox" name="" value="" >
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input type="checkbox" name="" value="" >
+                <input type="checkbox" name="" value="" >
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+              <td>
+                <input class="input_col_txt" type="text" name="">
+              </td>
+            </tr>
+          </tbody>
+        </table>
+        <input class="btn parent_right" type="button" name="" value="Add Row">
+        <div class="clear"></div>
+      </div>
 
-    <div>
-      <input type="button" name="" value="Reflash">
-      <input type="button" name="" value="Setup">
-    </div>
+      <div>
+         <p class="center_text table_col_botline">Pattern List</p>
+         <table class="pattern_list">
+          <thead>
+            <tr>
+              <!-- left -->
+              <th>상/하</th>
+              <th>각도</th>
+              <th>좌/우</th>
+              <th>각도</th>
+              <th>복귀</th>
+              <th>이동</th>
+              <th>유지</th>
+              <!-- right -->
+              <th>상/하</th>
+              <th>각도</th>
+              <th>좌/우</th>
+              <th>각도</th>
+              <th>복귀</th>
+              <th>이동</th>
+              <th>유지</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- pattern rows -->
+            <tr>
+              <td>Up</td>
+              <td>10</td>
+              <td>Left</td>
+              <td>10</td>
+              <td>10</td>
+              <td>10</td>
+              <td>10</td>
+              <td>Up</td>
+              <td>10</td>
+              <td>Left</td>
+              <td>10</td>
+              <td>10</td>
+              <td>10</td>
+              <td>10</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
 
+      <div>
+        <input class="btn" type="button" name="" value="Reflash">
+        <input class="btn parent_right" type="button" name="" value="Setup">
+        <div class="clear"></div>
+      </div>
+
+    </div>
   </div>
-</div>
 
 </body>

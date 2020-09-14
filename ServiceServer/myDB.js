@@ -30,7 +30,7 @@ const SQL_CT_SCHEDULEs = "CREATE TABLE schedule ( " +
 "pName VARCHAR(20) NOT NULL, " +
 "_order INT NOT NULL, " +
 "dateTime VARCHAR(20) NOT NULL, " +
-"fulfill BOOLEAN NOT NULL DEFAULT 'FALSE');"; 
+"fulfill BOOLEAN NOT NULL DEFAULT FALSE);"; 
 
 const SQL_CT_PATTERNs = "CREATE TABLE pattern ( " +
 "iCode INT NOT NULL, " +
