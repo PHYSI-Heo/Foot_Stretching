@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_anim_gradation"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
+    android:id="@+id/layout_frame"
+    tools:context=".MainActivity">
+
+    <LinearLayout
+        android:id="@+id/layout_menu"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_marginBottom="16dp"
+        android:orientation="horizontal"
+        tools:ignore="UselessParent">
+
+        <com.physis.foot.stretching.widget.MenuButton
+            android:id="@+id/mbtn_user_register"
+            android:layout_width="0px"
+            android:layout_height="256dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp"
+            app:ic_resid="@drawable/ic_user_register"
+            app:menu_text="User Register"/>
+
+        <com.physis.foot.stretching.widget.MenuButton
+            android:id="@+id/mbtn_user_scheduler"
+            android:layout_width="0px"
+            android:layout_height="256dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp"
+            app:ic_resid="@drawable/ic_user_schedule"
+            app:menu_text="User Scheduler"/>
+
+        <com.physis.foot.stretching.widget.MenuButton
+            android:id="@+id/mbtn_simple_user"
+            android:layout_width="0px"
+            android:layout_height="256dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp"
+            app:ic_resid="@drawable/ic_direct_gym"
+            app:menu_text="Simple User"/>
+    </LinearLayout>
+
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_alignParentTop="true"
+        android:layout_above="@id/layout_menu">
+
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="256dp"
+            android:layout_height="256dp"
+            android:src="@drawable/img_light_logo"
+            android:layout_centerVertical="true"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_title1"
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:layout_marginStart="32dp"
+            android:text="Foot &amp; Ankle Pattern"
+            android:textStyle="bold"
+            android:textSize="40sp"
+            android:textColor="@android:color/white"
+            android:layout_toEndOf="@id/iv_logo"
+            android:layout_alignTop="@id/iv_logo"
+            android:gravity="bottom"/>
+
+        <TextView
+            android:id="@+id/tv_title2"
+            android:layout_width="wrap_content"
+            android:layout_height="128dp"
+            android:layout_marginStart="32dp"
+            android:text="Stretching Manager"
+            android:textStyle="bold"
+            android:textSize="56sp"
+            android:textColor="@android:color/white"
+            android:layout_toEndOf="@id/iv_logo"
+            android:layout_below="@id/tv_title1"/>
+
+    </RelativeLayout>
+
+
+</RelativeLayout>

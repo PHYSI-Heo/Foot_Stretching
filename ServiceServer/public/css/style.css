@@ -142,3 +142,14 @@ th, td {
 	margin-bottom: 8px;
 	overflow-y: auto;
 }
+
+tbody .pattern_row{
+	background: #eee;
+}
+
+tbody .pattern_row td {
+	font-family:fantasy;
+	font-size: 12px;	
+	padding-top: 4px;
+	padding-bottom: 4px;
+}

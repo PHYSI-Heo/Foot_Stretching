@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <declare-styleable name="MenuButton">
+        <attr name="ic_resid" format="reference|integer"/>
+        <attr name="bottom_lienColor" format="reference|integer"/>
+        <attr name="menu_text" format="string"/>
+    </declare-styleable>
+
+</resources>

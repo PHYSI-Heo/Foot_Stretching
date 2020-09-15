@@ -17,9 +17,9 @@
     <div>
       <h5 class="title">Access Permission</h5>
       <p>Manager ID : </p>
-      <input class="inputTxt tab_left" type="text" name="">
+      <input class="inputTxt tab_left" type="text" name="" placeholder="manager code">
       <p>Password : </p>
-      <input class="inputTxt tab_left" type="text" name="">
+      <input class="inputTxt tab_left" type="password" name="" placeholder="password">
       <input class="btn" type="button" name="" value="Access">
     </div>
 
@@ -33,10 +33,11 @@
       <div>
         <p class="tab_small_left">Illness Selector : </p>
         <select>
-          <option>option1</option>
-          <option>option2</option>
+          <option>인대손상</option>
+          <option>발목골절</option>
+          <option>족저근막염</option>
         </select>
-        <input class="inputTxt tab_left" type="text" name="">
+        <input class="inputTxt tab_left" type="text" name="" placeholder="illness name">
         <input class="btn" type="button" name="" value="Add">
       </div>  
 
@@ -44,10 +45,10 @@
       <div>
         <p class="tab_small_left">Pattern Selector : </p>
         <select>
-          <option>pattern1</option>
-          <option>pattern2</option>
+          <option>배굴중점운동</option>
+          <option>복합운동</option>
         </select>
-        <input class="inputTxt tab_left" type="text" name="">
+        <input class="inputTxt tab_left" type="text" name="" placeholder="pattern name">
         <input class="btn" type="button" name="" value="Add">
       </div>   
 
@@ -92,23 +93,23 @@
                 <input type="checkbox" name="" value="" >
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="angle">
               </td>
               <td>
                 <input type="checkbox" name="" value="" >
                 <input type="checkbox" name="" value="" >
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="angle">
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input type="checkbox" name="" value="" >
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="sec">
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="sec">
               </td>
               <!-- right -->
               <td>
@@ -116,23 +117,23 @@
                 <input type="checkbox" name="" value="" >
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="angle">
               </td>
               <td>
                 <input type="checkbox" name="" value="" >
                 <input type="checkbox" name="" value="" >
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="angle">
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input type="checkbox" name="" value="" >
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="sec">
               </td>
               <td>
-                <input class="input_col_txt" type="text" name="">
+                <input class="input_col_txt" type="text" name="" placeholder="sec">
               </td>
             </tr>
           </tbody>
@@ -166,21 +167,117 @@
           </thead>
           <tbody>
             <!-- pattern rows -->
-            <tr>
-              <td>Up</td>
+            <tr class="pattern_row">
+              <td>UP</td>
+              <td>5</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+              <td>UP</td>
+              <td>5</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+            </tr>
+            <tr class="pattern_row">
+              <td>UP</td>
               <td>10</td>
               <td>Left</td>
-              <td>10</td>
-              <td>10</td>
-              <td>10</td>
-              <td>10</td>
-              <td>Up</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+              <td>UP</td>
               <td>10</td>
               <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+            </tr>
+            <tr class="pattern_row">
+              <td>UP</td>
+              <td>15</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+              <td>UP</td>
+              <td>15</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+            </tr>
+            <tr class="pattern_row">
+              <td>DOWN</td>
+              <td>5</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+              <td>DOWN</td>
+              <td>5</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+            </tr>
+            <tr class="pattern_row">
+              <td>DOWN</td>
               <td>10</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+              <td>DOWN</td>
               <td>10</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+            </tr>
+            <tr class="pattern_row">
+              <td>DOWN</td>
               <td>10</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+              <td>DOWN</td>
               <td>10</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>T</td>
+              <td>5</td>
+              <td>3</td>
+            </tr>
+            <tr class="pattern_row">
+              <td>UP</td>
+              <td>10</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>F</td>
+              <td>5</td>
+              <td>3</td>
+              <td>UP</td>
+              <td>10</td>
+              <td>Left</td>
+              <td>0</td>
+              <td>F</td>
+              <td>5</td>
+              <td>3</td>
             </tr>
           </tbody>
         </table>
