@@ -18,12 +18,12 @@ var dbConfig = {
 const SQL_CD = "CREATE DATABASE " + DBNAME;
 
 // varbinary & varchar
-const SQL_CT_USERs = "CREATE TABLE user ( " +
+const SQL_CT_USERs = "CREATE TABLE IF NOT EXISTS user ( " +
 "uCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
 "name VARCHAR(10) NOT NULL, " +
 "phone VARCHAR(20));";
 
-const SQL_CT_SCHEDULEs = "CREATE TABLE schedule ( " +
+const SQL_CT_SCHEDULEs = "CREATE TABLE IF NOT EXISTS schedule ( " +
 "no INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
 "uCode INT NOT NULL, " +
 "pCode INT NOT NULL, " +
@@ -32,11 +32,13 @@ const SQL_CT_SCHEDULEs = "CREATE TABLE schedule ( " +
 "dateTime VARCHAR(20) NOT NULL, " +
 "fulfill BOOLEAN NOT NULL DEFAULT FALSE);"; 
 
-const SQL_CT_PATTERNs = "CREATE TABLE pattern ( " +
-"iCode INT NOT NULL, " +
-"iName VARCHAR(20) NOT NULL, " +
-"pCode INT NOT NULL PRIMARY KEY, " +
+const SQL_CT_PATTERNs = "CREATE TABLE IF NOT EXISTS pattern ( " +
+"pCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
 "pName VARCHAR(20) NOT NULL, " +
+"keyword VARCHAR(250) NOT NULL);"; 
+
+const SQL_CT_PATTERN_DETAIL = "CREATE TABLE IF NOT EXISTS pattern_detail ( " +
+"pCode INT NOT NULL, " +
 "_order INT NOT NULL, " +
 "leftMove VARCHAR(30) NOT NULL, " +
 "rightMove VARCHAR(30) NOT NULL);"; 
@@ -50,6 +52,7 @@ module.exports.init = () => {
       await db.query(SQL_CT_USERs);    
       await db.query(SQL_CT_SCHEDULEs);  
       await db.query(SQL_CT_PATTERNs);    
+      await db.query(SQL_CT_PATTERN_DETAIL);   
     }catch(err){
       console.log(err);
     }   
@@ -168,6 +171,7 @@ module.exports.delete = (table, target, option) =>{
 
 module.exports.update = (table, params, target, option) =>{
   return new Promise(async(resolve, reject)=>{
+    var cnt = 0;
     sql = "UPDATE " + table + " SET ";
     var columns = Object.keys(params);
     if(params){

@@ -1,0 +1,127 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="8dp"
+    android:elevation="8dp"
+    android:layout_margin="8dp"
+    android:id="@+id/frame_pattern_item">
+
+    <TextView
+        android:id="@+id/tv_order"
+        android:layout_width="40dp"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:layout_centerVertical="true"
+        android:textStyle="bold"
+        android:textSize="18sp"
+        android:layout_marginEnd="16dp"
+        tools:text="1"/>
+
+    <LinearLayout
+        android:id="@+id/layout_left_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_order"
+        android:orientation="horizontal"
+        android:layout_marginBottom="8dp">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="[ L ]"/>
+
+        <TextView
+            android:id="@+id/tv_left_direction_angle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="UP\n(30)"/>
+
+        <TextView
+            android:id="@+id/tv_left_moving_time"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="UP\n(30)"/>
+
+        <TextView
+            android:id="@+id/tv_left_holding_time"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="UP\n(30)"/>
+
+        <TextView
+            android:id="@+id/tv_left_returnable"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Return"/>
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/layout_right_info"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_order"
+        android:layout_below="@id/layout_left_info"
+        android:orientation="horizontal">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:textSize="18sp"
+            android:textStyle="bold"
+            android:text="[ R ]"/>
+
+        <TextView
+            android:id="@+id/tv_right_direction_angle"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="UP\n(30)"/>
+
+        <TextView
+            android:id="@+id/tv_right_moving_time"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="UP\n(30)"/>
+
+        <TextView
+            android:id="@+id/tv_right_holding_time"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            tools:text="UP\n(30)"/>
+
+        <TextView
+            android:id="@+id/tv_right_returnable"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:layout_gravity="center"
+            android:text="Return"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

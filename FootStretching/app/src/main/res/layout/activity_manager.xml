@@ -1,0 +1,221 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal"
+    tools:context=".ManagerActivity">
+
+    <RelativeLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:background="@drawable/anim_first_layer"
+        android:layout_margin="4dp"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/tv_title_pattern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="운동패턴 리스트"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"/>
+
+        <Button
+            android:id="@+id/btn_add_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginVertical="8dp"
+            android:layout_marginHorizontal="16dp"
+            android:drawableStart="@drawable/ic_add"
+            android:theme="@style/WhiteBtnTheme"
+            android:layout_below="@id/tv_title_pattern"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="Add Pattern"/>
+
+        <EditText
+            android:id="@+id/et_search_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_add_pattern"
+            android:hint="Search Pattern."
+            android:inputType="text"
+            android:paddingStart="48dp"
+            android:paddingEnd="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:importantForAutofill="no" />
+
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/btn_add_pattern"
+            android:layout_alignBottom="@id/et_search_pattern"
+            android:padding="4dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_search"
+            tools:ignore="ContentDescription" />
+
+        <TextView
+            android:id="@+id/tv_notify_pattern"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/et_search_pattern"
+            android:gravity="center"
+            android:elevation="8dp"
+            android:text="등록된 운동패턴 정보가 없습니다."/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_patterns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_below="@id/et_search_pattern"/>
+
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="2"
+        android:orientation="vertical"
+        android:background="@drawable/anim_first_layer"
+        android:layout_margin="4dp"
+        android:padding="4dp">
+
+        <Button
+            android:id="@+id/btn_update_pattern_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="8dp"
+            android:drawableStart="@drawable/ic_save"
+            android:layout_alignParentEnd="true"
+            android:theme="@style/WhiteBtnTheme"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="Setup"/>
+
+        <TextView
+            android:id="@+id/tv_title_pattern_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="운동패턴 상세 정보"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingHorizontal="16dp"
+            android:layout_alignBaseline="@id/btn_update_pattern_item"/>
+
+
+        <TextView
+            android:id="@+id/tv_notify_pattern_item"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/btn_update_pattern_item"
+            android:gravity="center"
+            android:elevation="8dp"
+            android:text="등록된 운동패턴 항목이 존재하지 없습니다."/>
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_pattern_items"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:layout_below="@id/btn_update_pattern_item"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="4dp"/>
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:layout_width="0px"
+        android:layout_height="match_parent"
+        android:layout_weight="1"
+        android:orientation="vertical"
+        android:background="@drawable/anim_first_layer"
+        android:layout_margin="4dp"
+        android:padding="4dp">
+
+        <TextView
+            android:id="@+id/tv_title_set_item"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="운동패턴 설정"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"/>
+
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@android:color/white"
+            android:layout_below="@id/tv_title_set_item">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical"
+                android:paddingHorizontal="16dp"
+                android:paddingVertical="8dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Left Moving"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"
+                    android:layout_marginVertical="8dp"/>
+
+                <com.physis.foot.stretching.widget.PatternSetter
+                    android:id="@+id/ps_left_moving"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Right Moving"
+                    android:textStyle="bold"
+                    android:layout_marginTop="8dp"/>
+
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="@color/colorAccent"
+                    android:layout_marginVertical="8dp"/>
+
+                <com.physis.foot.stretching.widget.PatternSetter
+                    android:id="@+id/ps_right_moving"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginBottom="4dp"/>
+
+                <Button
+                    android:id="@+id/btn_setup_pattern_item"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:text="Setup"
+                    android:theme="@style/BtnTheme"
+                    style="@style/Widget.AppCompat.Button.Colored"/>
+
+            </LinearLayout>
+
+        </ScrollView>
+
+    </RelativeLayout>
+
+</LinearLayout>

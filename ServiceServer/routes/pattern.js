@@ -59,9 +59,48 @@ router.post('/update', async(req, res)=>{
 router.post('/delete', async(req, res)=>{
 	var resObj = {};
 	try{		
+		await db.delete("pattern_detail", 
+			req.body,
+			null);
 		resObj.rows = await db.delete("pattern", 
 			req.body,
 			null);
+		resObj.result = 1001;
+	}catch(err){
+		resObj.result = err.errno;
+		resObj.err = err.code;
+	}
+	console.log(resObj);
+	res.json(resObj);
+});
+
+
+router.post('/item/list', async(req, res)=>{
+	var resObj = {};
+	try{
+		resObj.rows = await db.select("pattern_detail", 
+			null, 
+			req.body, 
+			null);
+		resObj.result = 1001;
+	}catch(err){
+		resObj.result = err.errno;
+		resObj.err = err.code;
+	}
+	console.log(resObj);
+	res.json(resObj);
+});
+
+
+router.post('/item/update', async(req, res)=>{
+	var resObj = {};
+	try{
+		let target = {"pCode" : req.body[0].pCode};
+		await db.delete("pattern_detail", 
+			target,
+			null);	
+		resObj.rows = await db.insert("pattern_detail", 
+			req.body);
 		resObj.result = 1001;
 	}catch(err){
 		resObj.result = err.errno;

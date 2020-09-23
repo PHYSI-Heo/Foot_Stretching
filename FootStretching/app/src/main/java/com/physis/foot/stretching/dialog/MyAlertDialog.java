@@ -5,6 +5,8 @@ import android.content.Context;
 import android.content.DialogInterface;
 import android.view.View;
 
+import com.physis.foot.stretching.R;
+
 public class MyAlertDialog {
 
     private AlertDialog dialog = null;

@@ -19,12 +19,13 @@ router.post('/register', async(req, res)=>{
 	res.json(resObj);
 });
 
+
 router.post('/list', async(req, res)=>{
 	var resObj = {};
 	try{
 		resObj.rows = await db.select("user", 
 			null, 
-			req.body, 
+			null, 
 			null);
 		resObj.result = 1001;
 	}catch(err){
@@ -34,6 +35,7 @@ router.post('/list', async(req, res)=>{
 	console.log(resObj);
 	res.json(resObj);
 });
+
 
 router.post('/update/info', async(req, res)=>{
 	var resObj = {};
@@ -54,7 +56,7 @@ router.post('/update/info', async(req, res)=>{
 });
 
 
-router.post('/apped/schedule', async(req, res)=>{
+router.post('/add/schedule', async(req, res)=>{
 	var resObj = {};
 	try{
 		resObj.rows = await db.insert("schedule", req.body);		

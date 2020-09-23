@@ -17,7 +17,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ScheduleActivity"
+        <activity android:name=".ManagerActivity"></activity>
+        <activity android:name=".MemberUserActivity" />
+        <activity android:name=".SimpleUserActivity" />
+        <activity
+            android:name=".ScheduleActivity"
             android:screenOrientation="sensorLandscape" />
         <activity
             android:name=".MainActivity"

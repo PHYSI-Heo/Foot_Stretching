@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical"
+    android:layout_width="320dp"
+    android:paddingHorizontal="16dp"
+    android:paddingVertical="16dp"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pattern Name : "
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/et_pattern_name"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Name"
+        android:inputType="text"
+        android:gravity="center"/>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Pattern Keyword : "
+        android:textColor="@color/colorAccent"
+        android:textSize="16sp"/>
+
+    <EditText
+        android:id="@+id/et_pattern_keyword"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Keyword"
+        android:inputType="text"
+        android:gravity="center"/>
+
+</LinearLayout>

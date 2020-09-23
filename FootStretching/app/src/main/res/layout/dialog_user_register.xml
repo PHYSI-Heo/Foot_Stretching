@@ -18,7 +18,8 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:hint="Name."/>
 
     <TextView
         android:layout_width="wrap_content"
@@ -32,6 +33,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="phone"
-        android:gravity="center"/>
+        android:gravity="center"
+        android:hint="Phone Number."/>
 
 </LinearLayout>

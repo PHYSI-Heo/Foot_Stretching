@@ -10,165 +10,168 @@
     tools:context=".ScheduleActivity"
     tools:ignore="DisableBaselineAlignment">
 
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:background="@drawable/anim_first_layer"
         android:layout_margin="4dp"
+        android:padding="4dp"
         tools:ignore="UselessLeaf">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tv_user_list"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="환자 리스트"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"/>
+
+        <EditText
+            android:id="@+id/et_search_name"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_below="@id/tv_user_list"
+            android:hint="Search User Name."
+            android:inputType="text"
+            android:paddingStart="48dp"
+            android:paddingEnd="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:importantForAutofill="no" />
 
-            <TextView
-                android:id="@+id/tv_user_list"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="환자 리스트"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:paddingVertical="8dp"/>
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_user_list"
+            android:layout_alignBottom="@id/et_search_name"
+            android:padding="4dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_search"
+            tools:ignore="ContentDescription" />
 
-            <EditText
-                android:id="@+id/et_search_name"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_user_list"
-                android:hint="Search Name."
-                android:inputType="text"
-                android:paddingStart="40dp"
-                android:paddingEnd="8dp"
-                android:importantForAutofill="no" />
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_user_list"
-                android:layout_alignBottom="@id/et_search_name"
-                android:padding="4dp"
-                android:src="@drawable/ic_search"
-                tools:ignore="ContentDescription" />
-
-        </RelativeLayout>
+        <TextView
+            android:id="@+id/tv_notify_users"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:elevation="4dp"
+            android:gravity="center"
+            android:text="등록된 사용자가 없습니다." />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_users"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"/>
+            android:layout_below="@id/et_search_name"
+            android:background="@android:color/white"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="4dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <View
-        android:layout_width="1px"
-        android:layout_height="match_parent"
-        android:background="#E8E8E8"
-        android:layout_marginVertical="16dp"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:layout_weight="1"
-        android:orientation="vertical"
         android:background="@drawable/anim_first_layer"
+        android:padding="4dp"
         android:layout_margin="4dp">
 
         <TextView
+            android:id="@+id/tv_title_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:text="운동 일정"
             android:textSize="16sp"
             android:textStyle="bold"
             android:textColor="@android:color/white"
-            android:padding="16dp"/>
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"/>
 
-        <Button
+        <TextView
+            android:id="@+id/tv_notify_schedules"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:drawableStart="@drawable/ic_add"
-            android:theme="@style/WhiteBtnTheme"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Add Schedule"
-            android:layout_marginBottom="16dp"/>
+            android:layout_height="match_parent"
+            android:layout_below="@id/tv_title_schedule"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:text="일정 존재하지 않습니다."/>
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_schedules"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"/>
+            android:background="@android:color/white"
+            android:layout_below="@id/tv_title_schedule"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="4dp"/>
 
-    </LinearLayout>
+    </RelativeLayout>
 
-    <View
-        android:layout_width="1px"
-        android:layout_height="match_parent"
-        android:background="#E8E8E8"
-        android:layout_marginVertical="16dp"/>
-
-    <LinearLayout
+    <RelativeLayout
         android:layout_width="0px"
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
         android:background="@drawable/anim_first_layer"
-        android:layout_margin="4dp">
+        android:layout_margin="4dp"
+        android:padding="4dp">
 
-        <RelativeLayout
+        <TextView
+            android:id="@+id/tv_title_pattern"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="운동패턴 리스트"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="@android:color/white"
+            android:paddingVertical="8dp"
+            android:paddingHorizontal="16dp"/>
+
+        <EditText
+            android:id="@+id/et_search_pattern"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:padding="16dp">
+            android:layout_below="@id/tv_title_pattern"
+            android:hint="Search Pattern."
+            android:inputType="text"
+            android:paddingStart="48dp"
+            android:paddingEnd="8dp"
+            android:layout_marginHorizontal="8dp"
+            android:importantForAutofill="no" />
 
-            <TextView
-                android:id="@+id/tv_illness"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="질환 리스트"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:textColor="@android:color/white"
-                android:paddingVertical="8dp"/>
+        <ImageView
+            android:layout_width="32dp"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/tv_title_pattern"
+            android:layout_alignBottom="@id/et_search_pattern"
+            android:padding="4dp"
+            android:layout_marginStart="12dp"
+            android:src="@drawable/ic_search"
+            tools:ignore="ContentDescription" />
 
-            <EditText
-                android:id="@+id/et_search_illness"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_illness"
-                android:hint="Search Name."
-                android:inputType="text"
-                android:paddingStart="40dp"
-                android:paddingEnd="8dp"
-                android:importantForAutofill="no" />
-
-            <ImageView
-                android:layout_width="32dp"
-                android:layout_height="wrap_content"
-                android:layout_below="@id/tv_illness"
-                android:layout_alignBottom="@id/et_search_illness"
-                android:padding="4dp"
-                android:src="@drawable/ic_search"
-                tools:ignore="ContentDescription" />
-
-        </RelativeLayout>
-
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_illness"
+        <TextView
+            android:id="@+id/tv_notify_pattern"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:background="@android:color/white"/>
+            android:layout_below="@id/et_search_pattern"
+            android:gravity="center"
+            android:elevation="4dp"
+            android:text="설정된 운동패턴이 없습니다."/>
 
-    </LinearLayout>
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_patterns"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_below="@id/et_search_pattern"
+            android:background="@android:color/white"
+            android:paddingVertical="8dp"
+            android:layout_marginTop="4dp"/>
 
-    <View
-        android:layout_width="1px"
-        android:layout_height="match_parent"
-        android:background="#E8E8E8"
-        android:layout_marginVertical="16dp"/>
+    </RelativeLayout>
 
     <RelativeLayout
         android:layout_width="0px"
@@ -176,26 +179,6 @@
         android:layout_weight="1"
         android:background="@drawable/anim_first_layer"
         android:layout_margin="4dp">
-
-        <Button
-            android:id="@+id/btn_setup"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginHorizontal="16dp"
-            android:theme="@style/WhiteBtnTheme"
-            android:drawableStart="@drawable/ic_save"
-            style="@style/Widget.AppCompat.Button.Colored"
-            android:text="Setup"
-            android:layout_alignParentBottom="true"
-            android:layout_marginBottom="16dp"/>
-
-        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
-            android:id="@+id/mcv_calendar"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:mcv_showOtherDates="defaults"
-            android:layout_above="@id/btn_setup"
-            android:layout_margin="8dp"/>
 
         <TextView
             android:id="@+id/tv_calender"
@@ -206,29 +189,27 @@
             android:textStyle="bold"
             android:textColor="@android:color/white"
             android:paddingVertical="8dp"
-            android:paddingHorizontal="16dp"
-            android:layout_above="@id/mcv_calendar"/>
+            android:paddingHorizontal="16dp"/>
 
-        <TextView
-            android:id="@+id/tv_pattern"
+        <com.prolificinteractive.materialcalendarview.MaterialCalendarView
+            android:id="@+id/mcv_calendar"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="운동패턴 리스트"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:paddingVertical="16dp"
-            android:paddingHorizontal="16dp"
-            android:layout_alignParentTop="true"/>
+            app:mcv_showOtherDates="defaults"
+            android:layout_below="@id/tv_calender"
+            android:layout_margin="8dp"/>
 
-        <androidx.recyclerview.widget.RecyclerView
-            android:id="@+id/rv_patterns"
+        <Button
+            android:id="@+id/btn_setup"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:background="@android:color/white"
-            android:layout_below="@id/tv_pattern"
-            android:layout_above="@id/tv_calender"/>
-
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:theme="@style/WhiteBtnTheme"
+            android:drawableStart="@drawable/ic_save"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="Setup"
+            android:layout_below="@id/mcv_calendar"
+            android:layout_marginBottom="16dp"/>
 
     </RelativeLayout>
 

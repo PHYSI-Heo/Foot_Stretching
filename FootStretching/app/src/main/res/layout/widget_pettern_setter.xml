@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:orientation="vertical"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RadioButton
+            android:id="@+id/rbtn_angle_up"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="UP"/>
+
+        <RadioButton
+            android:id="@+id/rbtn_angle_down"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="DOWN"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_vertical_angle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Angle ( 0° ~ 40° )"
+        android:inputType="number"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <RadioGroup
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <RadioButton
+            android:id="@+id/rbtn_angle_left"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="LEFT"/>
+        <RadioButton
+            android:id="@+id/rbtn_angle_right"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="RIGHT"/>
+    </RadioGroup>
+
+    <EditText
+        android:id="@+id/et_horizontal_angle"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Angle ( 0° ~ 10° )"
+        android:inputType="number"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp" />
+
+    <CheckBox
+        android:id="@+id/cb_returnable"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Returnable"/>
+
+    <EditText
+        android:id="@+id/et_moving_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Moving Time ( Sec )"
+        android:inputType="number"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/et_holding_time"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Holding Time ( Sec )"
+        android:inputType="number"
+        android:gravity="center"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="8dp"/>
+
+
+</LinearLayout>

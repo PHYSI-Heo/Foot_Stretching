@@ -90,5 +90,18 @@
 
     </RelativeLayout>
 
+    <ImageView
+        android:id="@+id/iv_btn_set_pattern"
+        android:layout_width="56dp"
+        android:layout_height="56dp"
+        android:src="@drawable/ic_setup_pattern"
+        android:padding="8dp"
+        android:layout_alignParentEnd="true"
+        android:layout_margin="8dp"
+        android:clickable="true"
+        android:focusable="true"
+        android:background="?android:selectableItemBackground"
+        tools:ignore="ContentDescription" />
+
 
 </RelativeLayout>
