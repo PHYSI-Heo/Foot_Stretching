@@ -66,10 +66,10 @@
         android:text="Returnable"/>
 
     <EditText
-        android:id="@+id/et_moving_time"
+        android:id="@+id/et_moving_speed"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="Moving Time ( Sec )"
+        android:hint="Moving Speed ( 1 ~ 5 )"
         android:inputType="number"
         android:gravity="center"
         android:layout_marginTop="4dp"

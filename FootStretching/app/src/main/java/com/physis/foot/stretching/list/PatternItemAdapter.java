@@ -36,11 +36,9 @@ public class PatternItemAdapter extends RecyclerView.Adapter<PatternItemHolder> 
         this.selectedPatternItemListener = listener;
     }
 
-
     private List<PatternItemInfo> itemInfos = new LinkedList<>();
     private int selectedPosition = -1;
     private int oldPosition = -1;
-
 
     @NonNull
     @Override
@@ -58,12 +56,12 @@ public class PatternItemAdapter extends RecyclerView.Adapter<PatternItemHolder> 
         String[] rightDatas = info.getRightMoving().split(",");
 
         holder.tvLeftDirectionAngle.setText(getDirectionText(leftDatas[0]) + "\n" + leftDatas[1] + "");
-        holder.tvLeftMovingTime.setText("Moving\n" + leftDatas[3] + " Sec");
+        holder.tvLeftMovingSpeed.setText("Moving\n" + leftDatas[3] + " Phase");
         holder.tvLeftHoldingTime.setText("Holding\n" + leftDatas[4] + " Sec");
         holder.tvLeftReturnable.setTextColor(leftDatas[2].equals("1") ? Color.GREEN : Color.GRAY);
 
         holder.tvRightDirectionAngle.setText(getDirectionText(rightDatas[0]) + "\n" + rightDatas[1] + "");
-        holder.tvRightMovingTime.setText("Moving\n" + rightDatas[3] + " Sec");
+        holder.tvRightMovingSpeed.setText("Moving\n" + rightDatas[3] + " Phase");
         holder.tvRightHoldingTime.setText("Holding\n" + rightDatas[4] + " Sec");
         holder.tvRightReturnable.setTextColor(rightDatas[2].equals("1") ? Color.GREEN : Color.GRAY);
 

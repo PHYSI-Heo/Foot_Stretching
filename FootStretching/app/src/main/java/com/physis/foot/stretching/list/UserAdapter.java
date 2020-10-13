@@ -13,6 +13,7 @@ import com.physis.foot.stretching.list.holder.UserHolder;
 
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Random;
 
 public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
 
@@ -30,6 +31,10 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
     private int selectedPosition = -1;
     private int oldPosition = -1;
 
+    private int[] userColors = new int[]{
+            R.color.colorUser1,  R.color.colorUser2,  R.color.colorUser3,  R.color.colorUser4,
+    };
+
     @NonNull
     @Override
     public UserHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
@@ -44,6 +49,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
         holder.tvName.setText(info.getName());
         holder.tvPhone.setText(info.getPhone());
 
+        holder.ivPersonIcon.setBackgroundResource(userColors[position % userColors.length]);
         holder.itemFrame.setBackgroundResource(
                 selectedPosition == position ? R.color.colorSelectedPatterns : R.color.colorPatterns);
 

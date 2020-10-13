@@ -16,7 +16,7 @@ import com.physis.foot.stretching.R;
 
 public class PatternSetter extends LinearLayout {
 
-    private EditText etVerticalAngle, etHorizontalAngle, etMovingTime, etHoldingTime;
+    private EditText etVerticalAngle, etHorizontalAngle, etMovingSpeed, etHoldingTime;
     private RadioButton rbtnUp, rbtnDown, rbtnLeft, rbtnRight;
     private CheckBox cbReturnable;
 
@@ -35,7 +35,7 @@ public class PatternSetter extends LinearLayout {
 
         etVerticalAngle = view.findViewById(R.id.et_vertical_angle);
         etHorizontalAngle = view.findViewById(R.id.et_horizontal_angle);
-        etMovingTime = view.findViewById(R.id.et_moving_time);
+        etMovingSpeed = view.findViewById(R.id.et_moving_speed);
         etHoldingTime = view.findViewById(R.id.et_holding_time);
 
         rbtnUp = view.findViewById(R.id.rbtn_angle_up);
@@ -49,22 +49,29 @@ public class PatternSetter extends LinearLayout {
     public String getMovingData(){
         String verticalAngle = etVerticalAngle.getText().toString();
         String horizontalAngle = etHorizontalAngle.getText().toString();
-        String movingTime = etMovingTime.getText().toString();
+        String movingSpeed = etMovingSpeed.getText().toString();
         String holdingTime = etHoldingTime.getText().toString();
 
-        if(movingTime.isEmpty() || holdingTime.isEmpty()){
-            Toast.makeText(context, "이동 시간 및 유지 시간을 설정하세요.", Toast.LENGTH_SHORT).show();
+        if(movingSpeed.isEmpty() || holdingTime.isEmpty()){
+            Toast.makeText(context, "이동 속도 및 유지 시간을 설정하세요.", Toast.LENGTH_SHORT).show();
+            return null;
+        }
+
+        int speedNum = Integer.parseInt(movingSpeed);
+
+        if(speedNum < 0 || speedNum > 5){
+            Toast.makeText(context, "이동 속도 단계를 확인하세요.", Toast.LENGTH_SHORT).show();
             return null;
         }
 
         if((verticalAngle.isEmpty() || verticalAngle.equals("0")) && !horizontalAngle.isEmpty() && !horizontalAngle.equals("0")){
             // Left & Right
-            return (rbtnLeft.isChecked() ? "3," : "4,") + horizontalAngle + "," + (cbReturnable.isChecked() ? "1," : "0,") + movingTime + "," + holdingTime;
+            return (rbtnLeft.isChecked() ? "3," : "4,") + horizontalAngle + "," + (cbReturnable.isChecked() ? "1," : "0,") + movingSpeed + "," + holdingTime;
         }
 
         if((horizontalAngle.isEmpty() || horizontalAngle.equals("0")) && !verticalAngle.isEmpty() && !verticalAngle.equals("0")){
             // Up & Down
-            return (rbtnUp.isChecked() ? "1," : "2,") + verticalAngle + "," + (cbReturnable.isChecked() ? "1," : "0,") + movingTime + "," + holdingTime;
+            return (rbtnUp.isChecked() ? "1," : "2,") + verticalAngle + "," + (cbReturnable.isChecked() ? "1," : "0,") + movingSpeed + "," + holdingTime;
         }
 
         Toast.makeText(context, "한번에 상하 또는 좌우 각도 하나만 설정 가능합니다.", Toast.LENGTH_SHORT).show();
@@ -74,7 +81,7 @@ public class PatternSetter extends LinearLayout {
     public void initData(){
         etVerticalAngle.setText(null);
         etHorizontalAngle.setText(null);
-        etMovingTime.setText(null);
+        etMovingSpeed.setText(null);
         etHoldingTime.setText(null);
     }
 
@@ -82,7 +89,7 @@ public class PatternSetter extends LinearLayout {
         String[] datas = data.split(",");
         setDirectionAngle(datas[0], datas[1]);
         cbReturnable.setChecked(datas[2].equals("1"));
-        etMovingTime.setText(datas[3]);
+        etMovingSpeed.setText(datas[3]);
         etHoldingTime.setText(datas[4]);
     }
 

@@ -3,6 +3,7 @@ package com.physis.foot.stretching;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -13,6 +14,7 @@ import android.widget.Toast;
 import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.data.ScheduleInfo;
 import com.physis.foot.stretching.data.UserInfo;
+import com.physis.foot.stretching.dialog.LoadingDialog;
 import com.physis.foot.stretching.http.HttpAsyncTaskActivity;
 import com.physis.foot.stretching.http.HttpPacket;
 import com.physis.foot.stretching.list.PatternAdapter;
@@ -36,6 +38,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
 
     private MaterialCalendarView mcvCalender;
     private TextView tvNotifyUsers, tvNotifySchedule, tvNotifyPatterns;
+    private Button btnDelSchedule;
 
     private UserAdapter userAdapter;
     private ScheduleAdapter scheduleAdapter;
@@ -61,6 +64,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     @Override
     protected void onHttpResponse(String url, JSONObject resObj) {
         super.onHttpResponse(url, resObj);
+        LoadingDialog.dismiss();
         try {
             switch (url) {
                 case HttpPacket.GET_USERs_URL:
@@ -80,6 +84,10 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
                     Toast.makeText(getApplicationContext(), "운통 일정이 변경되었습니다.", Toast.LENGTH_SHORT).show();
                     updateScheduleInfo();
                     break;
+                case HttpPacket.DELETE_PATTERNs_URL:
+                    Toast.makeText(getApplicationContext(), "운통 일정이 삭제되었습니다.", Toast.LENGTH_SHORT).show();
+                    getUserSchedules(selectedUserInfo.getCode());
+                    break;
             }
         } catch (JSONException e) {
             e.printStackTrace();
@@ -88,16 +96,19 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
 
     @Override
     public void onClick(View view) {
-        if(view.getId() == R.id.btn_setup){
+        if(view.getId() == R.id.btn_setup_schedule){
             setupSchedule();
+        }else if(view.getId() == R.id.btn_del_schedule){
+            deleteSchedule();
         }
     }
 
     @Override
     public void onSelectUser(UserInfo info) {
         selectedUserInfo = info;
-        if(info != null)
+        if(info != null) {
             getUserSchedules(info.getCode());
+        }
     }
 
     @Override
@@ -113,16 +124,41 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     @Override
     public void onScheduleInfo(int position) {
         selectScheduleIndex = position;
+        btnDelSchedule.setVisibility(position != -1 ? View.VISIBLE : View.GONE);
         if(position != -1){
             String[] dates = scheduleInfos.get(position).getDateTime().split("-");
-            mcvCalender.setSelectedDate(CalendarDay.from(Integer.parseInt(dates[0]), Integer.parseInt(dates[1]), Integer.parseInt(dates[2])));
+            mcvCalender.setSelectedDate(CalendarDay.from(Integer.parseInt(dates[0]), Integer.parseInt(dates[1]) - 1, Integer.parseInt(dates[2])));
             patternAdapter.setSelectItem(scheduleInfos.get(position).getPatternCode());
+            btnDelSchedule.setEnabled(!scheduleInfos.get(position).getFulfill());
         }
     }
 
     @Override
     public void onStartSchedule(ScheduleInfo info) {
+        startStretchingActivity(info);
+    }
 
+    private void startStretchingActivity(ScheduleInfo info){
+        startActivity(new Intent(ScheduleActivity.this, MemberUserActivity.class)
+                .putExtra(HttpPacket.PARAMS_USER_NAME, selectedUserInfo.getName())
+                .putExtra(HttpPacket.PARAMS_USER_PHONE, selectedUserInfo.getPhone())
+                .putExtra(HttpPacket.PARAMS_DATE_TIME, info.getDateTime())
+                .putExtra(HttpPacket.PARAMS_PATTERN_NAME, info.getPatternName())
+                .putExtra(HttpPacket.PARAMS_PATTERN_CODE, info.getPatternCode()));
+    }
+
+    private void deleteSchedule(){
+        if(selectScheduleIndex == -1)
+            return;
+
+        JSONObject params = new JSONObject();
+        try {
+            params.put(HttpPacket.PARAMS_NO, scheduleInfos.get(selectScheduleIndex).getNo());
+            requestAPI(HttpPacket.DELETE_SCHEDULE_URL, params);
+            LoadingDialog.show(ScheduleActivity.this, "Delete Schedule..");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
     }
 
     private void updateScheduleInfo(){
@@ -160,6 +196,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
                 params.put(HttpPacket.PARAMS_NO, scheduleInfos.get(selectScheduleIndex).getNo());
                 requestAPI(HttpPacket.UPDATE_SCHEDULE_URL, params);
             }
+            LoadingDialog.show(ScheduleActivity.this, "Setup Schedule..");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -167,6 +204,8 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
 
 
     private void setScheduleList(JSONArray rows) {
+        selectScheduleIndex = -1;
+        btnDelSchedule.setVisibility(View.GONE);
         scheduleInfos.clear();
         for(int i = 0; i < rows.length(); i++){
             try {
@@ -193,6 +232,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
         try {
             params.put(HttpPacket.PARAMS_USER_CODE, userCode);
             requestAPI(HttpPacket.GET_SCHEDULEs_URL, params);
+            LoadingDialog.show(ScheduleActivity.this, "Get User Schedule..");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -241,6 +281,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
 
     private void getUserList(){
         requestAPI(HttpPacket.GET_USERs_URL);
+        LoadingDialog.show(ScheduleActivity.this, "Get Users..");
     }
 
     private void init() {
@@ -281,8 +322,10 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
         tvNotifySchedule = findViewById(R.id.tv_notify_schedules);
         tvNotifyPatterns = findViewById(R.id.tv_notify_pattern);
 
-        Button btnSetSchedule = findViewById(R.id.btn_setup);
+        Button btnSetSchedule = findViewById(R.id.btn_setup_schedule);
         btnSetSchedule.setOnClickListener(this);
+        btnDelSchedule = findViewById(R.id.btn_del_schedule);
+        btnDelSchedule.setOnClickListener(this);
     }
 
 }

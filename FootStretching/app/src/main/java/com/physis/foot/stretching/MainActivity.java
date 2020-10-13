@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.physis.foot.stretching.dialog.LoadingDialog;
 import com.physis.foot.stretching.dialog.MyAlertDialog;
 import com.physis.foot.stretching.http.HttpAsyncTaskActivity;
 import com.physis.foot.stretching.http.HttpPacket;
@@ -34,6 +35,7 @@ public class MainActivity extends HttpAsyncTaskActivity implements View.OnClickL
     @Override
     protected void onHttpResponse(String url, JSONObject resObj) {
         super.onHttpResponse(url, resObj);
+        LoadingDialog.dismiss();
         if(url.equals(HttpPacket.REGISTER_USER_URL)){
             registerDialog.dismiss();
             Toast.makeText(getApplicationContext(), "사용자 정보가 등록되었습니다.", Toast.LENGTH_SHORT).show();
@@ -70,6 +72,7 @@ public class MainActivity extends HttpAsyncTaskActivity implements View.OnClickL
             params.put(HttpPacket.PARAMS_USER_NAME, name);
             params.put(HttpPacket.PARAMS_USER_PHONE, phone);
             requestAPI(HttpPacket.REGISTER_USER_URL, params);
+            LoadingDialog.show(MainActivity.this, "Register User..");
         } catch (JSONException e) {
             e.printStackTrace();
         }

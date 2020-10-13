@@ -1,15 +1,19 @@
-package com.physis.foot.stretching.http;
+package com.physis.foot.stretching.fragment;
 
 import android.widget.Toast;
 
-import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
 
 import com.physis.foot.stretching.dialog.LoadingDialog;
+import com.physis.foot.stretching.http.HttpAsyncTask;
+import com.physis.foot.stretching.http.HttpPacket;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
 
-public class HttpAsyncTaskActivity extends AppCompatActivity {
+import java.util.Objects;
+
+public class MyBaseFragment extends Fragment {
 
     protected void requestAPI(String url, JSONObject params){
         HttpAsyncTask requester = new HttpAsyncTask(url, params.toString());
@@ -75,6 +79,6 @@ public class HttpAsyncTaskActivity extends AppCompatActivity {
                     errMsg = "알수없는 오류가 발생하였습니다.";
             }
         }
-        Toast.makeText(getApplicationContext(), errMsg, Toast.LENGTH_SHORT).show();
+        Toast.makeText(Objects.requireNonNull(getActivity()).getApplicationContext(), errMsg, Toast.LENGTH_SHORT).show();
     }
 }

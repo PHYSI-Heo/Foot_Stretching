@@ -15,7 +15,7 @@
         android:layout_height="72dp"
         android:src="@drawable/ic_person"
         android:padding="8dp"
-        android:background="@color/colorAccent"
+        tools:background="@color/colorAccent"
         tools:ignore="ContentDescription" />
 
     <TextView

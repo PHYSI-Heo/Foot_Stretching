@@ -7,6 +7,11 @@
     <color name="colorDisable">#CCA6A6A6</color>
     <color name="colorHighlight">#CCA7F2FF</color>
 
-    <color name="colorPatterns">#EAEAEA</color>
+    <color name="colorPatterns">#FBFBFB</color>
     <color name="colorSelectedPatterns">#D0E2FF</color>
+
+    <color name="colorUser1">#03DAC5</color>
+    <color name="colorUser2">#FFEB3B</color>
+    <color name="colorUser3">#81C784</color>
+    <color name="colorUser4">#FF8A65</color>
 </resources>

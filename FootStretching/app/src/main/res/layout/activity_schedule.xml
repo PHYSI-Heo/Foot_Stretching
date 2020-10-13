@@ -200,7 +200,7 @@
             android:layout_margin="8dp"/>
 
         <Button
-            android:id="@+id/btn_setup"
+            android:id="@+id/btn_setup_schedule"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
@@ -209,6 +209,18 @@
             style="@style/Widget.AppCompat.Button.Colored"
             android:text="Setup"
             android:layout_below="@id/mcv_calendar"
+            android:layout_marginBottom="8dp"/>
+
+        <Button
+            android:id="@+id/btn_del_schedule"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:theme="@style/WhiteBtnTheme"
+            android:drawableStart="@drawable/ic_delete"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="Delete"
+            android:layout_below="@id/btn_setup_schedule"
             android:layout_marginBottom="16dp"/>
 
     </RelativeLayout>

@@ -9,6 +9,8 @@ import android.view.View;
 import android.widget.TextView;
 
 import com.physis.foot.stretching.data.PatternInfo;
+import com.physis.foot.stretching.dialog.LoadingDialog;
+import com.physis.foot.stretching.fragment.StretchingFragment;
 import com.physis.foot.stretching.http.HttpAsyncTaskActivity;
 import com.physis.foot.stretching.http.HttpPacket;
 import com.physis.foot.stretching.list.PatternAdapter;
@@ -20,10 +22,12 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 import java.util.List;
 
-public class SimpleUserActivity extends HttpAsyncTaskActivity {
+public class SimpleUserActivity extends HttpAsyncTaskActivity implements PatternAdapter.OnSelectedPatternListener {
 
     private PatternAdapter patternAdapter;
     private TextView tvNotifyPattern;
+
+    private StretchingFragment fragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,6 +41,7 @@ public class SimpleUserActivity extends HttpAsyncTaskActivity {
     @Override
     protected void onHttpResponse(String url, JSONObject resObj) {
         super.onHttpResponse(url, resObj);
+        LoadingDialog.dismiss();
         try {
             if(url.equals(HttpPacket.GET_PATTERNs_URL)) {
                 setPatternList(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
@@ -44,6 +49,16 @@ public class SimpleUserActivity extends HttpAsyncTaskActivity {
         } catch (JSONException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onSelectedPattern(PatternInfo info) {
+        fragment.setPatternCode(info.getCode());
+    }
+
+    @Override
+    public void onEditPattern(PatternInfo info) {
+
     }
 
     private void setPatternList(JSONArray rows){
@@ -66,11 +81,13 @@ public class SimpleUserActivity extends HttpAsyncTaskActivity {
 
     private void getPatterList(){
         requestAPI(HttpPacket.GET_PATTERNs_URL);
+        LoadingDialog.show(SimpleUserActivity.this, "Get Patterns..");
     }
 
     private void init() {
+        fragment = new StretchingFragment();
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
-        fragmentTransaction.replace(R.id.frame_layout, StretchingFragment.newInstance("", "")).commit();
+        fragmentTransaction.replace(R.id.frame_layout, fragment).commit();
 
         LinearLayoutManager layoutManager = new LinearLayoutManager(getApplicationContext());
         layoutManager.setOrientation(LinearLayoutManager.VERTICAL);
@@ -78,6 +95,7 @@ public class SimpleUserActivity extends HttpAsyncTaskActivity {
         RecyclerView rcPattern = findViewById(R.id.rv_patterns);
         rcPattern.setLayoutManager(layoutManager);
         rcPattern.setAdapter(patternAdapter = new PatternAdapter());
+        patternAdapter.setOnSelectedPatternListener(this);
 
         tvNotifyPattern = findViewById(R.id.tv_notify_pattern);
     }

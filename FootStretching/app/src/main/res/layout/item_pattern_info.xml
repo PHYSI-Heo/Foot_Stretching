@@ -46,7 +46,7 @@
             tools:text="UP\n(30)"/>
 
         <TextView
-            android:id="@+id/tv_left_moving_time"
+            android:id="@+id/tv_left_moving_speed"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -98,7 +98,7 @@
             tools:text="UP\n(30)"/>
 
         <TextView
-            android:id="@+id/tv_right_moving_time"
+            android:id="@+id/tv_right_moving_speed"
             android:layout_width="0px"
             android:layout_height="wrap_content"
             android:layout_weight="1"

@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.data.PatternItemInfo;
+import com.physis.foot.stretching.dialog.LoadingDialog;
 import com.physis.foot.stretching.dialog.MyAlertDialog;
 import com.physis.foot.stretching.helper.SwipeAndDragHelper;
 import com.physis.foot.stretching.http.HttpAsyncTaskActivity;
@@ -59,6 +60,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
     @Override
     protected void onHttpResponse(String url, JSONObject resObj) {
         super.onHttpResponse(url, resObj);
+        LoadingDialog.dismiss();
         try {
             switch (url) {
                 case HttpPacket.GET_PATTERNs_URL:
@@ -151,6 +153,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
             e.getStackTrace();
         }
         requestAPI(HttpPacket.UPDATE_PATTERN_ITEMs_URL, params);
+        LoadingDialog.show(ManagerActivity.this, "Update Pattern Items..");
     }
 
     private void setPatternInfo(){
@@ -195,6 +198,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
                 params.put(HttpPacket.PARAMS_PATTERN_CODE, selectedPattern.getCode());
                 requestAPI(HttpPacket.UPDATE_PATTERN_URL, params);
             }
+            LoadingDialog.show(ManagerActivity.this, "Setup Pattern..");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -250,6 +254,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
             JSONObject params = new JSONObject();
             params.put(HttpPacket.PARAMS_PATTERN_CODE, patternCode);
             requestAPI(HttpPacket.GET_PATTERN_ITEMs_URL, params);
+            LoadingDialog.show(ManagerActivity.this, "Get Pattern Items..");
         } catch (JSONException e) {
             e.printStackTrace();
         }
@@ -282,6 +287,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
         psRightMoving.initData();
 
         requestAPI(HttpPacket.GET_PATTERNs_URL);
+        LoadingDialog.show(ManagerActivity.this, "Get Patterns..");
     }
 
     private void init() {

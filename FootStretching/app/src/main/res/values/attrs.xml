@@ -7,4 +7,8 @@
         <attr name="menu_text" format="string"/>
     </declare-styleable>
 
+    <declare-styleable name="MoveWinker">
+        <attr name="img_resid" format="reference|integer"/>
+    </declare-styleable>
+
 </resources>
