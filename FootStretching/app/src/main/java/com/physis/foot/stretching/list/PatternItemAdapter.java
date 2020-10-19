@@ -13,6 +13,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.physis.foot.stretching.R;
 import com.physis.foot.stretching.data.PatternItemInfo;
 import com.physis.foot.stretching.helper.SwipeAndDragHelper;
+import com.physis.foot.stretching.helper.SystemEnv;
 import com.physis.foot.stretching.list.holder.PatternItemHolder;
 
 import java.util.Collections;
@@ -55,12 +56,12 @@ public class PatternItemAdapter extends RecyclerView.Adapter<PatternItemHolder> 
         String[] leftDatas = info.getLeftMoving().split(",");
         String[] rightDatas = info.getRightMoving().split(",");
 
-        holder.tvLeftDirectionAngle.setText(getDirectionText(leftDatas[0]) + "\n" + leftDatas[1] + "");
+        holder.tvLeftDirectionAngle.setText(getDirectionText(leftDatas[0]) + "\n" + SystemEnv.getAnglePhaseValue(leftDatas[0], leftDatas[1]) + "");
         holder.tvLeftMovingSpeed.setText("Moving\n" + leftDatas[3] + " Phase");
         holder.tvLeftHoldingTime.setText("Holding\n" + leftDatas[4] + " Sec");
         holder.tvLeftReturnable.setTextColor(leftDatas[2].equals("1") ? Color.GREEN : Color.GRAY);
 
-        holder.tvRightDirectionAngle.setText(getDirectionText(rightDatas[0]) + "\n" + rightDatas[1] + "");
+        holder.tvRightDirectionAngle.setText(getDirectionText(rightDatas[0]) + "\n" + SystemEnv.getAnglePhaseValue(rightDatas[0], rightDatas[1]) + "");
         holder.tvRightMovingSpeed.setText("Moving\n" + rightDatas[3] + " Phase");
         holder.tvRightHoldingTime.setText("Holding\n" + rightDatas[4] + " Sec");
         holder.tvRightReturnable.setTextColor(rightDatas[2].equals("1") ? Color.GREEN : Color.GRAY);

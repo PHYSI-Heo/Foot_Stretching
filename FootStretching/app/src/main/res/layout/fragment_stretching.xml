@@ -19,12 +19,23 @@
         android:paddingVertical="8dp"
         android:paddingHorizontal="16dp"/>
 
+    <TextView
+        android:id="@+id/tv_state_msg"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:paddingVertical="8dp"
+        android:layout_alignParentBottom="true"
+        android:text="Status Message.."
+        android:textColor="@android:color/white"/>
+
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="horizontal"
         android:background="@android:color/white"
         android:layout_below="@id/tv_title_pattern"
+        android:layout_above="@id/tv_state_msg"
         android:padding="8dp">
 
         <LinearLayout
@@ -42,41 +53,10 @@
                 android:theme="@style/BtnTheme"
                 style="@style/Widget.AppCompat.Button.Colored"/>
 
-            <LinearLayout
+            <com.physis.foot.stretching.widget.PatternInfoCard
+                android:id="@+id/pic_left"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginVertical="16dp"
-                android:layout_marginHorizontal="16dp"
-                android:padding="16dp"
-                android:elevation="8dp"
-                android:background="@color/colorHighlight">
-
-                <TextView
-                    android:id="@+id/tv_left_direction_angle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="UP Direction - 30"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"/>
-
-
-                <TextView
-                    android:id="@+id/tv_left_moving_speed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Moving Speed - 1"/>
-
-
-                <TextView
-                    android:id="@+id/tv_left_holding_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Holding Time - 10 Sec"/>
-
-            </LinearLayout>
-
+                android:layout_height="wrap_content"/>
 
             <com.physis.foot.stretching.widget.MoveWinker
                 android:id="@+id/mv_left"
@@ -103,44 +83,10 @@
                 android:theme="@style/BtnTheme"
                 style="@style/Widget.AppCompat.Button.Colored"/>
 
-            <LinearLayout
+            <com.physis.foot.stretching.widget.PatternInfoCard
+                android:id="@+id/pic_right"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="vertical"
-                android:layout_marginVertical="16dp"
-                android:layout_marginHorizontal="16dp"
-                android:padding="16dp"
-                android:elevation="8dp"
-                android:background="@color/colorHighlight">
-
-                <TextView
-                    android:id="@+id/tv_right_direction_angle"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="UP Direction - 30"
-                    android:textStyle="bold"
-                    android:textSize="18sp"
-                    android:textColor="@android:color/black"
-                    android:layout_gravity="end"/>
-
-
-                <TextView
-                    android:id="@+id/tv_right_moving_speed"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Moving Speed - 1"
-                    android:layout_gravity="end"/>
-
-
-                <TextView
-                    android:id="@+id/tv_right_holding_time"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:text="Holding Time - 10 Sec"
-                    android:layout_gravity="end"/>
-
-            </LinearLayout>
-
+                android:layout_height="wrap_content"/>
 
             <com.physis.foot.stretching.widget.MoveWinker
                 android:id="@+id/mv_right"

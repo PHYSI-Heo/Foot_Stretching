@@ -45,10 +45,8 @@ public class MoveWinker extends LinearLayout {
         ivLeft = view.findViewById(R.id.iv_move_left);
         ivRight = view.findViewById(R.id.iv_move_right);
 
-        animator = ObjectAnimator.ofInt(ivUp, "backgroundColor",
-                getResources().getColor(R.color.colorAccent, null),
-                getResources().getColor(R.color.colorHighlight, null),
-                getResources().getColor(R.color.colorAccent, null));
+        animator = ObjectAnimator.ofInt(ivUp, "imageResource",
+                R.drawable.ic_up_enable, R.drawable.ic_up_disable);
         animator.setDuration(500);
         animator.setEvaluator(new ArgbEvaluator());
         animator.setRepeatCount(Animation.INFINITE);
@@ -61,24 +59,40 @@ public class MoveWinker extends LinearLayout {
         typedArray.recycle();
     }
 
-    private ImageView getTargetWidget(String direction){
+    private void setTargetWidget(String direction){
+        if(animator == null)
+            return;
+
         switch (direction){
             case "1":
-                return ivUp;
+                animator.setIntValues(R.drawable.ic_up_enable, R.drawable.ic_up_disable);
+                animator.setTarget(ivUp);
+                break;
             case "2":
-                return ivDown;
+                animator.setIntValues(R.drawable.ic_down_enable, R.drawable.ic_down_disable);
+                animator.setTarget(ivDown);
+                break;
             case "3":
-                return ivLeft;
+                animator.setIntValues(R.drawable.ic_left_enable, R.drawable.ic_left_disable);
+                animator.setTarget(ivLeft);
+                break;
             default:
-                return ivRight;
+                animator.setIntValues(R.drawable.ic_right_enable, R.drawable.ic_right_disable);
+                animator.setTarget(ivRight);
+                break;
         }
     }
 
-    public void startBlink(String direction){
-        if(animator.isStarted())
-            animator.end();
-        animator.setTarget(getTargetWidget(direction));
-        animator.start();
+    public void startBlink(String data){
+        try{
+            String dir = data.split(",")[0];
+            if(animator.isStarted())
+                animator.end();
+            setTargetWidget(dir);
+            animator.start();
+        }catch (Exception e){
+            e.getStackTrace();
+        }
     }
 
     public void stopBlink(){

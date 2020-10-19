@@ -11,6 +11,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.Toast;
 
+import com.physis.foot.stretching.ble.BluetoothLEManager;
 import com.physis.foot.stretching.dialog.LoadingDialog;
 import com.physis.foot.stretching.dialog.MyAlertDialog;
 import com.physis.foot.stretching.http.HttpAsyncTaskActivity;
@@ -23,13 +24,22 @@ import org.json.JSONObject;
 public class MainActivity extends HttpAsyncTaskActivity implements View.OnClickListener {
 
     private MyAlertDialog registerDialog;
+    private BluetoothLEManager bleManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        bleManager = BluetoothLEManager.getInstance(getApplicationContext());
+        bleManager.bindService();
 
         init();
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        bleManager.unBindService();
     }
 
     @Override

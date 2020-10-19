@@ -3,11 +3,15 @@ package com.physis.foot.stretching;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -15,6 +19,7 @@ import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.data.ScheduleInfo;
 import com.physis.foot.stretching.data.UserInfo;
 import com.physis.foot.stretching.dialog.LoadingDialog;
+import com.physis.foot.stretching.dialog.MyAlertDialog;
 import com.physis.foot.stretching.http.HttpAsyncTaskActivity;
 import com.physis.foot.stretching.http.HttpPacket;
 import com.physis.foot.stretching.list.PatternAdapter;
@@ -108,6 +113,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
         selectedUserInfo = info;
         if(info != null) {
             getUserSchedules(info.getCode());
+
         }
     }
 
@@ -134,8 +140,17 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     }
 
     @Override
-    public void onStartSchedule(ScheduleInfo info) {
-        startStretchingActivity(info);
+    public void onStartSchedule(final ScheduleInfo info) {
+        final MyAlertDialog dialog = new MyAlertDialog();
+        dialog.show(ScheduleActivity.this, "재활운동 시작",
+                info.getDateTime() + " (" + info.getPatternName() + ") 운동 일정을 시작합니다.",
+                new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialogInterface, int i) {
+                        dialog.dismiss();
+                        startStretchingActivity(info);
+                    }
+                });
     }
 
     private void startStretchingActivity(ScheduleInfo info){
@@ -326,6 +341,42 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
         btnSetSchedule.setOnClickListener(this);
         btnDelSchedule = findViewById(R.id.btn_del_schedule);
         btnDelSchedule.setOnClickListener(this);
+
+        EditText etSearchPattern = findViewById(R.id.et_search_pattern);
+        etSearchPattern.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                patternAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        EditText etSearchName = findViewById(R.id.et_search_name);
+        etSearchName.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                userAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 }

@@ -3,6 +3,8 @@ package com.physis.foot.stretching.list;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,7 +16,7 @@ import com.physis.foot.stretching.list.holder.DualLineHolder;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> {
+public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> implements Filterable {
 
     public interface OnSelectedPatternListener{
         void onSelectedPattern(PatternInfo info);
@@ -28,10 +30,42 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> {
     }
 
 
-    private List<PatternInfo> patterns = new LinkedList<>();
+    private List<PatternInfo> originalPatterns = new LinkedList<>();
+    private List<PatternInfo> filteredPatterns = new LinkedList<>();
+
     private int selectedPosition = -1;
     private int oldPosition = -1;
 
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String keyword = charSequence.toString();
+                if(keyword.isEmpty()){
+                    filteredPatterns = originalPatterns;
+                }else{
+                    List<PatternInfo> filteringPatterns = new LinkedList<>();
+                    for(PatternInfo info : originalPatterns){
+                        if(info.getKeyword().toLowerCase().contains(keyword.toLowerCase())){
+                            filteringPatterns.add(info);
+                        }
+                    }
+                    filteredPatterns = filteringPatterns;
+                }
+                FilterResults filterResults = new FilterResults();
+                filterResults.values = filteredPatterns;
+                return filterResults;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//                filteredPatterns = (List<PatternInfo>) filterResults.values;
+                selectedPosition = oldPosition = -1;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     @NonNull
     @Override
@@ -42,7 +76,7 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull DualLineHolder holder, final int position) {
-        final PatternInfo info = patterns.get(position);
+        final PatternInfo info = filteredPatterns.get(position);
 
         holder.tvMainLine.setText(info.getName());
         holder.tvSubLine.setText(info.getKeyword().isEmpty() ? "NULL" : info.getKeyword());
@@ -75,7 +109,7 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> {
 
     @Override
     public int getItemCount() {
-        return patterns.size();
+        return filteredPatterns.size();
     }
 
     private void setSelectedPosition(int position){
@@ -88,14 +122,14 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> {
 
     public void setItems(List<PatternInfo> patterns){
         selectedPosition = oldPosition = -1;
-        this.patterns = patterns;
+        this.originalPatterns = filteredPatterns = patterns;
         notifyDataSetChanged();
     }
 
     public void setSelectItem(String patternCode){
         int position = -1;
-        for(int i = 0; i < patterns.size(); i++){
-            if(patterns.get(i).getCode().equals(patternCode)){
+        for(int i = 0; i < originalPatterns.size(); i++){
+            if(originalPatterns.get(i).getCode().equals(patternCode)){
                 position = i;
                 break;
             }

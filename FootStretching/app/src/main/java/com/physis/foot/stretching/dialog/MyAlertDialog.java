@@ -21,6 +21,17 @@ public class MyAlertDialog {
         dialog = dialogBuilder.show();
     }
 
+    public void show(Context context, String title, String msg, DialogInterface.OnClickListener onPositiveButtonClickListener)
+    {
+        dismiss();
+        AlertDialog.Builder dialogBuilder =  new AlertDialog.Builder(context);
+        dialogBuilder.setTitle(title).setMessage(msg)
+                .setPositiveButton(android.R.string.ok, onPositiveButtonClickListener)
+                .setNegativeButton(android.R.string.cancel, null)
+                .setCancelable(false).create();
+        dialog = dialogBuilder.show();
+    }
+
     public void show(Context context, String title, View view, DialogInterface.OnClickListener onPositiveButtonClickListener)
     {
         dismiss();

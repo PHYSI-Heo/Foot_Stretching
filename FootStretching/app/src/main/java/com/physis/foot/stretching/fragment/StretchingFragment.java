@@ -8,12 +8,15 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.physis.foot.stretching.R;
+import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.data.PatternItemInfo;
 import com.physis.foot.stretching.dialog.LoadingDialog;
 import com.physis.foot.stretching.http.HttpPacket;
 import com.physis.foot.stretching.widget.MoveWinker;
+import com.physis.foot.stretching.widget.PatternInfoCard;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -24,12 +27,13 @@ import java.util.List;
 
 public class StretchingFragment extends MyBaseFragment implements View.OnClickListener{
 
-    private TextView tvLeftAngle, tvLeftMovingTime, tvLeftHoldingTime;
-    private TextView tvRightAngle, tvRightMovingTime, tvRightHoldingTime;
+    private TextView tvStateMsg;
+    private PatternInfoCard picLeft, picRight;
     private MoveWinker mvLeft, mvRight;
 
     private String patternCode;
     private List<PatternItemInfo> patternItemInfos = new LinkedList<>();
+    private int patternPos = 0;
 
     public void setPatternCode(String code){
         this.patternCode = code;
@@ -42,6 +46,8 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        bleManager.registerReceiver();
+        bleManager.setHandler(handler);
     }
 
     @SuppressLint("WrongConstant")
@@ -56,18 +62,21 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
         Button btnStop = view.findViewById(R.id.btn_stop_move);
         btnStop.setOnClickListener(this);
 
-        tvLeftAngle = view.findViewById(R.id.tv_left_direction_angle);
-        tvLeftMovingTime = view.findViewById(R.id.tv_left_moving_speed);
-        tvLeftHoldingTime = view.findViewById(R.id.tv_left_holding_time);
-
-        tvRightAngle = view.findViewById(R.id.tv_right_direction_angle);
-        tvRightMovingTime = view.findViewById(R.id.tv_right_moving_speed);
-        tvRightHoldingTime = view.findViewById(R.id.tv_right_holding_time);
+        picLeft = view.findViewById(R.id.pic_left);
+        picRight = view.findViewById(R.id.pic_right);
 
         mvLeft = view.findViewById(R.id.mv_left);
         mvRight = view.findViewById(R.id.mv_right);
 
+        tvStateMsg = view.findViewById(R.id.tv_state_msg);
+
         return view;
+    }
+
+    @Override
+    public void onDestroy() {
+        super.onDestroy();
+        bleManager.unregisterReceiver();
     }
 
     @Override
@@ -77,7 +86,7 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
                 getPatternItems();
                 break;
             case R.id.btn_stop_move:
-                mvLeft.startBlink("3");
+
                 break;
         }
     }
@@ -89,11 +98,49 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
             switch (url){
                 case HttpPacket.GET_PATTERN_ITEMs_URL:
                     setPatternItems(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
+                    if(patternItemInfos.size() == 0){
+                        Toast.makeText(getActivity(), "등록된 운동패턴 정보가 없습니다.", Toast.LENGTH_SHORT).show();
+                        return;
+                    }else{
+                        connectBoard(); // connect ble
+                    }
                     break;
                 default:
             }
         } catch (JSONException e) {
             e.printStackTrace();
+        }
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onReadyToDevice() {
+        super.onReadyToDevice();
+        picLeft.initInfo();
+        picRight.initInfo();
+        tvStateMsg.setText("Zero 설정을 진행합니다.");
+        sendControlMessage("ZS");
+    }
+
+    @SuppressLint("SetTextI18n")
+    @Override
+    protected void onReceiveAck(String msg) {
+        super.onReceiveAck(msg);
+        patternPos = msg.equals("ZS") ? 0 : patternPos + 1;
+        if(patternPos != patternItemInfos.size()){
+            PatternItemInfo info = patternItemInfos.get(patternPos);
+            picLeft.setInfo(info.getLeftMoving());
+            picRight.setInfo(info.getRightMoving());
+            mvLeft.startBlink(info.getLeftMoving());
+            mvRight.startBlink(info.getRightMoving());
+            tvStateMsg.setText((patternPos + 1) + " 번째 Phase를 진행합니다..");
+            sendControlMessage(info.getLeftMoving() + "/" + info.getRightMoving());
+        }else{
+            // finish
+            sendControlMessage("FN");
+            mvLeft.stopBlink();
+            mvRight.stopBlink();
+            tvStateMsg.setText("패턴운동이 종료되었습니다.");
         }
     }
 
@@ -117,11 +164,15 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
     private void getPatternItems(){
         if(patternCode == null)
             return;
+
+        picLeft.initInfo();
+        picRight.initInfo();
+
         JSONObject params = new JSONObject();
         try {
             params.put(HttpPacket.PARAMS_PATTERN_CODE, patternCode);
             requestAPI(HttpPacket.GET_PATTERN_ITEMs_URL, params);
-            LoadingDialog.show(getActivity(), "Get Pattern items..");
+            LoadingDialog.show(getActivity(), "Ready tp Pattern Exercise..");
         } catch (JSONException e) {
             e.printStackTrace();
         }

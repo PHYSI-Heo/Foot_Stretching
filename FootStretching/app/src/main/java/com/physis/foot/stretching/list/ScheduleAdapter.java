@@ -74,7 +74,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<DualLineHolder> {
         holder.itemFrame.setOnLongClickListener(new View.OnLongClickListener() {
             @Override
             public boolean onLongClick(View view) {
-                if(listener != null)
+                if(listener != null && !info.getFulfill())
                     listener.onStartSchedule(info);
                 return false;
             }
@@ -87,6 +87,7 @@ public class ScheduleAdapter extends RecyclerView.Adapter<DualLineHolder> {
     }
 
     public void setItems(List<ScheduleInfo> infos){
+        selectedPosition = oldPosition = -1;
         this.scheduleInfos = infos;
         notifyDataSetChanged();
     }

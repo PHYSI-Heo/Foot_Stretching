@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_marginVertical="16dp"
+    android:layout_marginHorizontal="8dp"
+    android:padding="16dp"
+    android:elevation="8dp"
+    android:background="@color/colorPatterns">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical">
+
+        <TextView
+            android:id="@+id/tv_direction_angle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Direction > -- ( --° )"
+            android:textStyle="bold"
+            android:textSize="18sp"
+            android:textColor="@android:color/black"/>
+
+        <TextView
+            android:id="@+id/tv_moving_speed"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Moving Speed > --"/>
+
+        <TextView
+            android:id="@+id/tv_holding_time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Holding Time > -- Sec"/>
+
+    </LinearLayout>
+
+    <ImageView
+        android:id="@+id/iv_return_icon"
+        android:layout_width="48dp"
+        android:layout_height="48dp"
+        android:layout_alignParentEnd="true"
+        android:layout_centerVertical="true"
+        android:src="@drawable/ic_return_disable"/>
+
+</RelativeLayout>

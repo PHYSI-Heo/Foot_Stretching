@@ -165,6 +165,8 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
         String leftMoving = psLeftMoving.getMovingData();
         String rightMoving = psRightMoving.getMovingData();
 
+        Log.e(TAG, leftMoving + ", " + rightMoving);
+
         if(leftMoving == null || leftMoving.isEmpty() || rightMoving == null || rightMoving.isEmpty())
             return;
 

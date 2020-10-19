@@ -3,19 +3,21 @@ package com.physis.foot.stretching.list;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Filter;
+import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.physis.foot.stretching.R;
+import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.data.UserInfo;
 import com.physis.foot.stretching.list.holder.UserHolder;
 
 import java.util.LinkedList;
 import java.util.List;
-import java.util.Random;
 
-public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
+public class UserAdapter extends RecyclerView.Adapter<UserHolder> implements Filterable {
 
     public interface OnSelectedUserListener{
         void onSelectUser(UserInfo info);
@@ -27,13 +29,46 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
         this.listener = listener;
     }
 
-    private List<UserInfo> users = new LinkedList<>();
+    private List<UserInfo> originalUsers = new LinkedList<>();
+    private List<UserInfo> filteredUsers = new LinkedList<>();
+
     private int selectedPosition = -1;
     private int oldPosition = -1;
 
     private int[] userColors = new int[]{
             R.color.colorUser1,  R.color.colorUser2,  R.color.colorUser3,  R.color.colorUser4,
     };
+
+    @Override
+    public Filter getFilter() {
+        return new Filter() {
+            @Override
+            protected FilterResults performFiltering(CharSequence charSequence) {
+                String name = charSequence.toString();
+                if(name.isEmpty()){
+                    filteredUsers = originalUsers;
+                }else{
+                    List<UserInfo> filteringUsers = new LinkedList<>();
+                    for(UserInfo info : originalUsers){
+                        if(info.getName().toLowerCase().contains(name.toLowerCase())){
+                            filteringUsers.add(info);
+                        }
+                    }
+                    filteredUsers = filteringUsers;
+                }
+                FilterResults results = new FilterResults();
+                results.values = filteredUsers;
+                return results;
+            }
+
+            @Override
+            protected void publishResults(CharSequence charSequence, FilterResults filterResults) {
+//                filteredUsers = (List<UserInfo>) filterResults.values;
+                selectedPosition = oldPosition = -1;
+                notifyDataSetChanged();
+            }
+        };
+    }
 
     @NonNull
     @Override
@@ -44,7 +79,7 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull UserHolder holder, final int position) {
-        final UserInfo info = users.get(position);
+        final UserInfo info = filteredUsers.get(position);
 
         holder.tvName.setText(info.getName());
         holder.tvPhone.setText(info.getPhone());
@@ -73,11 +108,11 @@ public class UserAdapter extends RecyclerView.Adapter<UserHolder> {
 
     @Override
     public int getItemCount() {
-        return users.size();
+        return filteredUsers.size();
     }
 
     public void setItems(List<UserInfo> userInfos){
-        users = userInfos;
+        originalUsers = filteredUsers = userInfos;
         notifyDataSetChanged();
     }
 }
