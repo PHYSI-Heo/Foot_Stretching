@@ -153,3 +153,10 @@ tbody .pattern_row td {
 	padding-top: 4px;
 	padding-bottom: 4px;
 }
+
+.notify_err {
+	font-family:fantasy;
+	font-size: 10px;	
+	padding-top: 4px;
+	padding-bottom: 4px;
+}

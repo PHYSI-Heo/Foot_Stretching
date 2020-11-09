@@ -1,7 +1,8 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const path = require('path');
-
+const session = require('express-session');
+const mysqlsession = require('express-mysql-session')(session);
 
 const db = require('./myDB');
 db.init();
@@ -21,6 +22,13 @@ app.set('views', __dirname + '/views');
 app.set('view engine', 'ejs');
 app.engine('html', require('ejs').renderFile);
 
+app.use(session({
+  secret : '3#(@29%8!#)',
+  resave : false,
+  saveUninitialized : true,
+  store :new mysqlsession(db.config)
+}));
+
 
 app.listen(app.get('port'), function() {
   console.log("# Start Server..");
@@ -33,7 +41,5 @@ app.use('/user', deviceRouter);
 var imgRouter = require('./routes/pattern');
 app.use('/pattern', imgRouter);
 
-
-app.get('/manager', function(req, res, next) {
-  res.render('manager.html');
-});
+var managerRouter = require('./routes/manager');
+app.use('/manager', managerRouter);

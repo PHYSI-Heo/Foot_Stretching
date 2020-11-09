@@ -9,19 +9,27 @@ const DBNAME = 'foot';
 var dbConfig = {
   host : MYSQLIP,
   port : 3306,
+  database : DBNAME,
   user : MYSQLID,
   password : MYSQLPWD,
   connectionLimit:100,
   waitForConnections:true
 };
+module.exports.config = dbConfig;
 
 const SQL_CD = "CREATE DATABASE " + DBNAME;
 
 // varbinary & varchar
+const SQL_CT_HOSPITALs = "CREATE TABLE IF NOT EXISTS hospital ( " +
+"hCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+"email VARCHAR(30) NOT NULL, " +
+"name VARCHAR(30) NOT NULL, " +
+"pwd VARCHAR(30) NOT NULL);";
+
 const SQL_CT_USERs = "CREATE TABLE IF NOT EXISTS user ( " +
 "uCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
 "name VARCHAR(10) NOT NULL, " +
-"phone VARCHAR(20));";
+"phone VARCHAR(20) NOT NULL);";
 
 const SQL_CT_SCHEDULEs = "CREATE TABLE IF NOT EXISTS schedule ( " +
 "no INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
@@ -35,6 +43,8 @@ const SQL_CT_SCHEDULEs = "CREATE TABLE IF NOT EXISTS schedule ( " +
 const SQL_CT_PATTERNs = "CREATE TABLE IF NOT EXISTS pattern ( " +
 "pCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
 "pName VARCHAR(20) NOT NULL, " +
+"hCode INT NOT NULL, " +
+"hName VARCHAR(20) NOT NULL, " +
 "keyword VARCHAR(250) NOT NULL);"; 
 
 const SQL_CT_PATTERN_DETAIL = "CREATE TABLE IF NOT EXISTS pattern_detail ( " +
@@ -49,6 +59,7 @@ module.exports.init = () => {
   initDB().then(async()=>{
     try{
       const db = dbPool.promise();
+      await db.query(SQL_CT_HOSPITALs);    
       await db.query(SQL_CT_USERs);    
       await db.query(SQL_CT_SCHEDULEs);  
       await db.query(SQL_CT_PATTERNs);    
@@ -65,6 +76,17 @@ function initDB() {
       dbConfig.database = DBNAME;
       dbPool = mysql.createPool(dbConfig);
       res();
+    });
+  });
+}
+
+module.exports.sqlQuery = (sql) => {
+  return new Promise(async(resolve, reject)=>{   
+    dbPool.query(sql, (err, rows, fields) => {
+      if(err)
+        reject(err);    
+      if(rows)
+        resolve(rows);
     });
   });
 }
