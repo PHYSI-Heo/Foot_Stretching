@@ -23,11 +23,6 @@ public class HttpAsyncTaskActivity extends AppCompatActivity {
         requester.execute();
     }
 
-    protected void requestAPI(String url){
-        HttpAsyncTask requester = new HttpAsyncTask(url, null);
-        requester.setOnResponseListener(responseListener);
-        requester.execute();
-    }
 
     final HttpAsyncTask.OnResponseListener responseListener = new HttpAsyncTask.OnResponseListener() {
         @Override
@@ -57,6 +52,8 @@ public class HttpAsyncTaskActivity extends AppCompatActivity {
     private static final String REQ_SUCCESS  = "1001";
     private static final String ERR_DB_CONNECT = "1002";
     private static final String ERR_DB_QUERY = "1003";
+    private static final String ERR_NO_EXIST_EMAIL = "1102";
+    private static final String ERR_PWD = "1103";
 
     private void showErrorToast(String errCode){
         LoadingDialog.dismiss();
@@ -71,8 +68,14 @@ public class HttpAsyncTaskActivity extends AppCompatActivity {
                 case  ERR_DB_QUERY:
                     errMsg = "올바른 입력 정보가 아닙니다.";
                     break;
+                case  ERR_NO_EXIST_EMAIL:
+                    errMsg = "등록되지 않은 이메일 정보입니다..";
+                    break;
+                case  ERR_PWD:
+                    errMsg = "비밀번호가 일치하지 않습니다.";
+                    break;
                 default:
-                    errMsg = "알수없는 오류가 발생하였습니다.";
+                    errMsg = "알수없는 오류가 발생하였습니다.." + errCode;
             }
         }
         Toast.makeText(getApplicationContext(), errMsg, Toast.LENGTH_SHORT).show();

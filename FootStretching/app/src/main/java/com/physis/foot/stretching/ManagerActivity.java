@@ -63,7 +63,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
         LoadingDialog.dismiss();
         try {
             switch (url) {
-                case HttpPacket.GET_PATTERNs_URL:
+                case HttpPacket.GET_MY_PATTERNs_URL:
                     setPatternList(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
                     break;
                 case HttpPacket.GET_PATTERN_ITEMs_URL:
@@ -288,7 +288,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
         psLeftMoving.initData();
         psRightMoving.initData();
 
-        requestAPI(HttpPacket.GET_PATTERNs_URL);
+        requestAPI(HttpPacket.GET_MY_PATTERNs_URL, (JSONObject) null);
         LoadingDialog.show(ManagerActivity.this, "Get Patterns..");
     }
 

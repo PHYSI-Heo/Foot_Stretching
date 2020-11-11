@@ -21,6 +21,13 @@
         <item name="android:textStyle">bold</item>
     </style>
 
+    <style name="MainBtnTheme" parent="ThemeOverlay.AppCompat.Dark">
+        <item name="colorButtonNormal">@android:color/darker_gray</item>    <!-- Disable Color -->
+        <item name="android:colorAccent">@color/colorAccent</item>         <!-- Enable  Color -->
+        <item name="android:textColor">@android:color/white</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
 
     <style name="LoadingTheme" parent="@android:style/Theme.Dialog">
         <item name="android:windowBackground">@android:color/transparent</item>

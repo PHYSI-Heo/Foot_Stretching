@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_anim_gradation"
+    android:id="@+id/layout_frame"
+    tools:context=".IntroActivity">
+
+    <ImageView
+        android:id="@+id/iv_logo"
+        android:layout_width="wrap_content"
+        android:layout_height="256dp"
+        android:src="@drawable/img_light_logo"
+        tools:ignore="ContentDescription"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="64dp"/>
+
+    <LinearLayout
+        android:layout_width="400dp"
+        android:layout_height="wrap_content"
+        android:paddingHorizontal="32dp"
+        android:paddingBottom="16dp"
+        android:paddingTop="24dp"
+        android:layout_marginTop="16dp"
+        android:orientation="vertical"
+        android:layout_below="@id/iv_logo"
+        android:layout_centerHorizontal="true"
+        android:background="@drawable/bg_white_round">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:text="Manager Email :"/>
+
+        <EditText
+            android:id="@+id/et_email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textEmailAddress"
+            android:gravity="center"
+            android:hint="Email."/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textAllCaps="true"
+            android:textColor="@color/colorAccent"
+            android:text="Password:"/>
+
+        <EditText
+            android:id="@+id/et_pwd"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:inputType="textPassword"
+            android:gravity="center"
+            android:hint="Password."/>
+
+        <Button
+            android:id="@+id/btn_login"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginVertical="8dp"
+            android:theme="@style/MainBtnTheme"
+            android:drawableStart="@drawable/ic_key"
+            style="@style/Widget.AppCompat.Button.Colored"
+            android:text="Login"/>
+
+    </LinearLayout>
+
+</RelativeLayout>

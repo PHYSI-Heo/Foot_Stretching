@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     android:orientation="vertical"
     android:layout_width="320dp"
     android:paddingHorizontal="16dp"
@@ -7,33 +8,35 @@
     android:layout_height="wrap_content">
 
     <TextView
+        android:id="@+id/tv_title1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="User Name : "
+        tools:text="Title 1 : "
         android:textColor="@color/colorAccent"
         android:textSize="16sp"/>
 
     <EditText
-        android:id="@+id/et_user_name"
+        android:id="@+id/et_text1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="text"
         android:gravity="center"
-        android:hint="Name."/>
+        tools:hint="Edit 1."/>
 
     <TextView
+        android:id="@+id/tv_title2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Phone Number : "
+        tools:text="Title 2 : "
         android:textColor="@color/colorAccent"
         android:textSize="16sp"/>
 
     <EditText
-        android:id="@+id/et_phone_num"
+        android:id="@+id/et_text2"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:inputType="phone"
+        android:inputType="text"
         android:gravity="center"
-        android:hint="Phone Number."/>
+        tools:hint="Edit 2."/>
 
 </LinearLayout>

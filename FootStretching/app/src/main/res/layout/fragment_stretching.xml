@@ -12,19 +12,30 @@
         android:id="@+id/tv_title_pattern"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="운동 패턴 정보"
+        android:text="Motion Information"
+        android:textAllCaps="true"
         android:textSize="16sp"
         android:textStyle="bold"
         android:textColor="@android:color/white"
+        android:gravity="center_vertical"
         android:paddingVertical="8dp"
-        android:paddingHorizontal="16dp"/>
+        android:paddingHorizontal="16dp"
+        android:layout_marginStart="48dp"
+        android:layout_marginBottom="4dp"/>
+
+    <ImageView
+        android:layout_width="32dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@id/tv_title_pattern"
+        android:layout_alignBottom="@id/tv_title_pattern"
+        android:src="@drawable/ic_logo"
+        android:layout_marginStart="16dp"/>
 
     <TextView
         android:id="@+id/tv_state_msg"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="40dp"
         android:gravity="center"
-        android:paddingVertical="8dp"
         android:layout_alignParentBottom="true"
         android:text="Status Message.."
         android:textColor="@android:color/white"/>

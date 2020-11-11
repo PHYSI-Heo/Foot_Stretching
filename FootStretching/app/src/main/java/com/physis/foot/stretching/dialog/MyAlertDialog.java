@@ -62,6 +62,25 @@ public class MyAlertDialog {
         dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(onClickListener);
     }
 
+    public void show(Context context, View view, String btnText, View.OnClickListener onClickListener)
+    {
+        dismiss();
+        AlertDialog.Builder dialogBuilder =  new AlertDialog.Builder(context);
+        dialogBuilder.setTitle(null).setView(view)
+                .setNegativeButton(btnText, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+
+                    }
+                })
+                .setCancelable(false);
+        dialog = dialogBuilder.create();
+        dialog.show();
+        // no dismiss
+        dialog.getButton(AlertDialog.BUTTON_NEGATIVE).setOnClickListener(onClickListener);
+    }
+
+
     public void dismiss(){
         if(dialog != null){
             dialog.dismiss();

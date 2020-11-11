@@ -14,20 +14,28 @@
         android:layout_height="match_parent"
         android:layout_weight="1"
         android:orientation="vertical"
-        android:background="@drawable/anim_first_layer"
+        android:background="@drawable/bg_anim_gradation"
         android:layout_margin="4dp"
         android:padding="4dp">
 
+        <ImageView
+            android:id="@+id/iv_logo"
+            android:layout_width="wrap_content"
+            android:layout_height="216dp"
+            android:padding="32dp"
+            android:src="@drawable/img_light_logo"/>
+
         <TextView
             android:id="@+id/tv_title_pattern"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="운동패턴 리스트"
+            android:layout_below="@id/iv_logo"
+            android:text="PATTERNs"
             android:textSize="16sp"
-            android:textStyle="bold"
-            android:textColor="@android:color/white"
-            android:paddingVertical="8dp"
-            android:paddingHorizontal="16dp"/>
+            android:textColor="@color/colorAccent"
+            android:paddingVertical="12dp"
+            android:paddingHorizontal="16dp"
+            android:background="@android:color/white"/>
 
         <TextView
             android:id="@+id/tv_notify_pattern"
@@ -43,8 +51,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:background="@android:color/white"
-            android:paddingVertical="8dp"
-            android:layout_marginTop="4dp"
+            android:paddingBottom="8dp"
             android:paddingHorizontal="8dp"
             android:layout_below="@id/tv_title_pattern"/>
 

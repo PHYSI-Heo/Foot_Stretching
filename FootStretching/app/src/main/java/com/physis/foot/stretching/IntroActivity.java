@@ -31,7 +31,7 @@ public class IntroActivity extends AppCompatActivity {
     private Runnable introRunnable = new Runnable() {
         @Override
         public void run() {
-            startActivity(new Intent(IntroActivity.this, MainActivity.class));
+            startActivity(new Intent(IntroActivity.this, LoginActivity.class));
             finish();
         }
     };

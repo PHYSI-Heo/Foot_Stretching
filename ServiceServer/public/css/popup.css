@@ -1,0 +1,31 @@
+/* Popup box BEGIN */
+.popup-box {
+  background: rgba(0, 0, 0, .4);
+  cursor: pointer;
+  display: none;
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  text-align: center;
+  top: 0;
+  z-index: 10000;
+}
+
+.popup-box>div {
+  background-color: #fff;
+  box-shadow: 10px 10px 60px #555;
+  display: inline-block;
+  height: auto;
+  min-width: 300px;
+  /* height: 100px; */
+  vertical-align: middle;
+  position: relative;
+  border-radius: 8px;
+  padding: 20px;
+  margin-right: 16rem;
+}
+
+
+#tbd_detail_pattern tr:hover {
+  background: #bcddff;
+}

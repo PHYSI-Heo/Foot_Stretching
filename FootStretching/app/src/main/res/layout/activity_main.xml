@@ -10,6 +10,16 @@
     android:id="@+id/layout_frame"
     tools:context=".MainActivity">
 
+    <TextView
+        android:id="@+id/tv_hospital_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="16dp"
+        android:textStyle="bold"
+        android:textSize="24sp"
+        android:textColor="@android:color/white"
+        android:text="Unknown."/>
+
     <LinearLayout
         android:id="@+id/layout_menu"
         android:layout_width="match_parent"
@@ -20,75 +30,63 @@
         tools:ignore="UselessParent">
 
         <com.physis.foot.stretching.widget.MenuButton
-            android:id="@+id/mbtn_user_register"
+            android:id="@+id/mbtn_pattern_setting"
             android:layout_width="0px"
-            android:layout_height="256dp"
+            android:layout_height="232dp"
+            android:layout_weight="1"
+            android:layout_marginHorizontal="8dp"
+            app:ic_resid="@drawable/ic_web_setting"
+            app:menu_text="패턴운동 관리"/>
+
+        <com.physis.foot.stretching.widget.MenuButton
+            android:id="@+id/mbtn_user_manager"
+            android:layout_width="0px"
+            android:layout_height="232dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
             app:ic_resid="@drawable/ic_user_register"
-            app:menu_text="User Register"/>
+            app:menu_text="환자 정보관리"/>
 
         <com.physis.foot.stretching.widget.MenuButton
             android:id="@+id/mbtn_user_scheduler"
             android:layout_width="0px"
-            android:layout_height="256dp"
+            android:layout_height="232dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
             app:ic_resid="@drawable/ic_user_schedule"
-            app:menu_text="User Scheduler"/>
+            app:menu_text="환자 일정관리"/>
 
         <com.physis.foot.stretching.widget.MenuButton
             android:id="@+id/mbtn_simple_user"
             android:layout_width="0px"
-            android:layout_height="256dp"
+            android:layout_height="232dp"
             android:layout_weight="1"
             android:layout_marginHorizontal="8dp"
             app:ic_resid="@drawable/ic_direct_gym"
-            app:menu_text="Simple User"/>
+            app:menu_text="간편 패턴운동"/>
+
     </LinearLayout>
 
-
-    <RelativeLayout
+    <ImageView
+        android:id="@+id/iv_logo"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="160dp"
+        android:paddingHorizontal="128dp"
+        android:src="@drawable/img_row_logo"
         android:layout_centerHorizontal="true"
         android:layout_alignParentTop="true"
-        android:layout_above="@id/layout_menu">
+        android:layout_marginTop="88dp"
+        android:layout_marginBottom="-16dp"/>
 
-        <ImageView
-            android:id="@+id/iv_logo"
-            android:layout_width="256dp"
-            android:layout_height="256dp"
-            android:src="@drawable/img_light_logo"
-            android:layout_centerVertical="true"
-            tools:ignore="ContentDescription" />
-
-        <TextView
-            android:id="@+id/tv_title1"
-            android:layout_width="wrap_content"
-            android:layout_height="128dp"
-            android:layout_marginStart="32dp"
-            android:text="Foot &amp; Ankle Pattern"
-            android:textStyle="bold"
-            android:textSize="40sp"
-            android:textColor="@android:color/white"
-            android:layout_toEndOf="@id/iv_logo"
-            android:layout_alignTop="@id/iv_logo"
-            android:gravity="bottom"/>
-
-        <TextView
-            android:id="@+id/tv_title2"
-            android:layout_width="wrap_content"
-            android:layout_height="128dp"
-            android:layout_marginStart="32dp"
-            android:text="Stretching Manager"
-            android:textStyle="bold"
-            android:textSize="56sp"
-            android:textColor="@android:color/white"
-            android:layout_toEndOf="@id/iv_logo"
-            android:layout_below="@id/tv_title1"/>
-
-    </RelativeLayout>
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/white"
+        android:textSize="24sp"
+        android:text="Smart Foot Rehabilitation Manager"
+        android:layout_below="@id/iv_logo"
+        android:layout_centerHorizontal="true"
+        android:layout_above="@id/layout_menu"/>
 
     <ImageView
         android:id="@+id/iv_btn_set_pattern"
@@ -101,6 +99,7 @@
         android:clickable="true"
         android:focusable="true"
         android:background="?android:selectableItemBackground"
+        android:visibility="gone"
         tools:ignore="ContentDescription" />
 
 

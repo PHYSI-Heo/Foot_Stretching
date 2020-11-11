@@ -1,18 +1,3 @@
-<!--
-
-=========================================================
-* Argon Dashboard - v1.1.2
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/argon-dashboard
-* Copyright 2020 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/argon-dashboard/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software. -->
 <!DOCTYPE html>
 <html lang="en">
 
@@ -20,7 +5,7 @@
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <title>
-    Argon Dashboard - Free Dashboard for Bootstrap 4 by Creative Tim
+    Footcure Dashboard
   </title>
   <!-- Favicon -->
   <link href="/img/brand/favicon.png" rel="icon" type="image/png">
@@ -40,19 +25,16 @@
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
       </button>
-      <!-- Brand -->
-      <a class="navbar-brand pt-0" href="../index.html">
-        <img src="/img/brand/blue.png" class="navbar-brand-img" alt="...">
-      </a>      
+     <!-- Brand -->
+      <a class="navbar-brand pt-0" href="" style="margin-top: 32px;">
+        <img src="/img/brand/logo_blue.png" class="navbar-brand-img" alt="..." style="max-height:100%;">
+      </a>
       <!-- Collapse -->
       <div class="collapse navbar-collapse" id="sidenav-collapse-main">
         <!-- Collapse header -->
         <div class="navbar-collapse-header d-md-none">
           <div class="row">
-            <div class="col-6 collapse-brand">
-              <a href="../index.html">
-                <img src="/img/brand/blue.png">
-              </a>
+            <div class="col-6 collapse-brand">             
             </div>
             <div class="col-6 collapse-close">
               <button type="button" class="navbar-toggler" data-toggle="collapse" data-target="#sidenav-collapse-main" aria-controls="sidenav-main" aria-expanded="false" aria-label="Toggle sidenav">
@@ -103,15 +85,15 @@
   </nav>
   <div class="main-content">    
     <!-- Header -->
-    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 400px; background-image: url(/img/theme/profile-cover.jpg); background-size: cover; background-position: center top;">
+    <div class="header pb-8 pt-5 pt-lg-8 d-flex align-items-center" style="min-height: 400px; background-image: url(/img/theme/profile-cover.jpg); background-size: cover; background-position: center top; padding-left: 2.5rem;">
       <!-- Mask -->
       <span class="mask bg-gradient-default opacity-8"></span>
       <!-- Header container -->
-      <div class="container-fluid d-flex align-items-center">
+      <div class="container-fluid d-flex align-items-center" style="margin-bottom: 2rem;">
         <div class="row">
           <div class="col-lg-12">
             <h1 id="client_title1" class="display-2 text-white">Hello!</h1>     
-            <h4 id="client_title2" class="text-white">Hello Jesse</h4>         
+            <h5 id="client_title2" class="text-light">Hello Jesse</h5>         
           </div>
         </div>
       </div>
@@ -122,218 +104,222 @@
         <div class="col-xl-4 order-xl-2 mb-5 mb-xl-0">
           <div class="card card-profile shadow">           
             <div class="card-header bg-white border-0">
-               <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">My Patterns</h3>
-                </div>
-                <div class="col-4 text-right">
-                  <button type="button" id="btn_reflash" class="btn btn-sm btn-primary">Reflash</button>
-                </div>
+             <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">My Patterns</h3>
               </div>
-            </div>
-            <div id="pattern_list" class="card-body pt-0 pt-md-4">              
-              <!-- pattern items -->
+              <div class="col-4 text-right">
+                <button type="button" id="btn_reflash" class="btn btn-sm btn-primary">Reflash</button>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="col-xl-8 order-xl-1">
-          <div class="card bg-secondary shadow">
-            <div class="card-header bg-white border-0">
-              <div class="row align-items-center">
-                <div class="col-8">
-                  <h3 class="mb-0">Detail Information</h3>
-                </div>
-                <div class="col-4 text-right">
-                  <button type="button" id="btn_reload" class="btn btn-sm btn-info">Reload</button>
-                  <button type="button" id="btn_pattern_setup" class="btn btn-sm btn-default">Settings</button>
-                </div>
-              </div>
-            </div>
-            <div class="card-body">
-              <form>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-4">
-                      <div class="form-group">
-                        <label class="form-control-label" for="pattern_name">Pattern Name</label>
-                        <input type="text" id="pattern_name" class="form-control form-control-alternative" placeholder="Pattern name.">
-                      </div>
-                    </div>    
-                    <div class="col-lg-8">
-                      <div class="form-group">
-                        <label class="form-control-label" for="pattern_keyword">Keyword</label>
-                        <input type="text" id="pattern_keyword" class="form-control form-control-alternative" placeholder="Pattern keyword.">
-                      </div>
-                    </div>     
-                    <div class="col-lg-12">
-                      <div class="form-group">
-                        <label class="form-control-label" for="pattern_explanation">Explanation</label>
-                        <input type="text" id="pattern_explanation" class="form-control form-control-alternative" placeholder="Pattern explanation.">
-                      </div>
-                    </div>                           
-                  </div>                  
-                </div>
-                <hr class="my-4" />
-
-                <div class="row">
-                  <div class="col-8">
-                     <h6 class="heading-small text-muted mb-4">Motion Setting</h6>
-                  </div>
-                  <div class="col-4 text-right">
-                    <button type="button" id="btn_item_setup" class="btn btn-sm btn-primary">Settings</button>
-                  </div>
-                </div>
-                <div class="pl-lg-4">
-                  <div class="row">
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">(L)Direction</label>
-                        <select id="left_dirs" class="form-control form-control-alternative">
-                          <option value="1">Up</option>
-                          <option value="2">Down</option>
-                          <option value="3">Left</option>
-                          <option value="4">Right</option>
-                        </select>
-                        <!-- <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York"> -->
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Angle</label>
-                        <input type="text" id="left_angle" class="form-control form-control-alternative" placeholder="degree">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Speed</label>
-                        <input type="number" id="left_speed" class="form-control form-control-alternative" placeholder="1~5 Phase">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Holding</label>
-                        <input type="number" id="left_hold" class="form-control form-control-alternative" placeholder="Sec">
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Returnable</label>
-                        <div class="custom-control custom-control-alternative custom-checkbox" style="padding-top: 0.5rem;">
-                          <input class="custom-control-input" id="left_return" type="checkbox">
-                          <label class="custom-control-label" for="left_return">
-                            <span class="text-muted">Return</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-city">(R)Direction</label>
-                        <select id="right_dirs" class="form-control form-control-alternative">
-                          <option value="1">Up</option>
-                          <option value="2">Down</option>
-                          <option value="3">Left</option>
-                          <option value="4">Right</option>
-                        </select>
-                        <!-- <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York"> -->
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Angle</label>
-                        <input type="text" id="right_angle" class="form-control form-control-alternative" placeholder="degree">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Speed</label>
-                        <input type="number" id="right_speed" class="form-control form-control-alternative" placeholder="1~5 Phase">
-                      </div>
-                    </div>
-                    <div class="col-lg-3">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Holding</label>
-                        <input type="number" id="right_hold" class="form-control form-control-alternative" placeholder="Sec">
-                      </div>
-                    </div>
-                    <div class="col-lg-2">
-                      <div class="form-group">
-                        <label class="form-control-label" for="input-country">Returnable</label>
-                        <div class="custom-control custom-control-alternative custom-checkbox" style="padding-top: 0.5rem;">
-                          <input class="custom-control-input" id="right_return" type="checkbox">
-                          <label class="custom-control-label" for="right_return">
-                            <span class="text-muted">Return</span>
-                          </label>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <hr class="my-4" />
-                <!-- Description -->
-                <h6 class="heading-small text-muted mb-4">Motion List</h6>
-                <div class="pl-lg-4">
-                  <div class="form-group">
-                    <div class="table-responsive table_pattern_items">
-              <table id="tb_items" class="table align-items-center table-flush">
-                <thead class="thead-light">
-                  <tr>
-                    <th scope="col">(L)Direction</th>
-                    <th scope="col">(L)Angle</th>
-                    <th scope="col">(L)Speed</th>
-                    <th scope="col">(L)Holding</th>
-                    <th scope="col">(L)Returnable</th>
-                    <th scope="col">(R)Direction</th>
-                    <th scope="col">(R)Angle</th>
-                    <th scope="col">(R)Speed</th>
-                    <th scope="col">(R)Holding</th>
-                    <th scope="col">(R)Returnable</th>
-                    <th scope="col"></th>
-                  </tr>
-                </thead>
-                <tbody id="tbd_items">                 
-                </tbody>
-              </table>
-            </div>
-                  </div>
-                </div>
-              </form>
-            </div>
+          <div id="pattern_list" class="card-body pt-0 pt-md-4" style="background: #f7fafc">       
+            <div id="nofity_pattern_cnt" style="color: #b5b5b5; font-size: 13px;">등록된 운동패턴이 없습니다.</div>       
+            <!-- pattern items -->
           </div>
         </div>
       </div>
-      <!-- Footer -->
-      <footer class="footer">
-        <div class="row align-items-center justify-content-xl-between">
-          <div class="col-xl-6">
-            <div class="copyright text-center text-xl-left text-muted">
-              &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">알씨스쾌어</a>
+      <div class="col-xl-8 order-xl-1">
+        <div class="card bg-secondary shadow">
+          <div class="card-header bg-white border-0">
+            <div class="row align-items-center">
+              <div class="col-8">
+                <h3 class="mb-0">Detail Information</h3>
+              </div>
+              <div class="col-4 text-right">
+                <button type="button" id="btn_del_info" class="btn btn-sm btn-info">Delete</button>
+                <button type="button" id="btn_save_info" class="btn btn-sm btn-default">Save</button>
+              </div>
             </div>
           </div>
-          
+          <div class="card-body">
+            <form>
+              <div class="pl-lg-4">
+                <div class="row">
+                  <div class="col-lg-4">
+                    <div class="form-group">
+                      <label class="form-control-label" for="pattern_name">Pattern Name</label>
+                      <input type="text" id="pattern_name" class="form-control form-control-alternative" placeholder="Pattern name.">
+                    </div>
+                  </div>    
+                  <div class="col-lg-8">
+                    <div class="form-group">
+                      <label class="form-control-label" for="pattern_keyword">Keyword</label>
+                      <input type="text" id="pattern_keyword" class="form-control form-control-alternative" placeholder="Pattern keyword.">
+                    </div>
+                  </div>     
+                  <div class="col-lg-12">
+                    <div class="form-group">
+                      <label class="form-control-label" for="pattern_explanation">Explanation</label>
+                      <input type="text" id="pattern_explanation" class="form-control form-control-alternative" placeholder="Pattern explanation.">
+                    </div>
+                  </div>                           
+                </div>                  
+              </div>
+              <hr class="my-4" />
+
+              <div class="row">
+                <div class="col-8">
+                 <h6 class="heading-small text-muted mb-4">Motion Setting</h6>
+               </div>
+               <div class="col-4 text-right">
+                <button type="button" id="btn_item_setup" class="btn btn-sm btn-primary">Settings</button>
+              </div>
+            </div>
+            <div class="pl-lg-4">
+              <div class="row">
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-city">(L)Direction</label>
+                    <select id="left_dirs" class="form-control form-control-alternative">
+                      <option value="1">Up</option>
+                      <option value="2">Down</option>
+                      <option value="3">Left</option>
+                      <option value="4">Right</option>
+                    </select>
+                    <!-- <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York"> -->
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Angle</label>
+                    <input type="text" id="left_angle" class="form-control form-control-alternative" placeholder="degree">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Speed</label>
+                    <input type="number" id="left_speed" class="form-control form-control-alternative" placeholder="1~5 Phase">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Holding</label>
+                    <input type="number" id="left_hold" class="form-control form-control-alternative" placeholder="Sec">
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Returnable</label>
+                    <div class="custom-control custom-control-alternative custom-checkbox" style="padding-top: 0.5rem;">
+                      <input class="custom-control-input" id="left_return" type="checkbox">
+                      <label class="custom-control-label" for="left_return">
+                        <span class="text-muted">Return</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="row">
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-city">(R)Direction</label>
+                    <select id="right_dirs" class="form-control form-control-alternative">
+                      <option value="1">Up</option>
+                      <option value="2">Down</option>
+                      <option value="3">Left</option>
+                      <option value="4">Right</option>
+                    </select>
+                    <!-- <input type="text" id="input-city" class="form-control form-control-alternative" placeholder="City" value="New York"> -->
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Angle</label>
+                    <input type="text" id="right_angle" class="form-control form-control-alternative" placeholder="degree">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Speed</label>
+                    <input type="number" id="right_speed" class="form-control form-control-alternative" placeholder="1~5 Phase">
+                  </div>
+                </div>
+                <div class="col-lg-3">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Holding</label>
+                    <input type="number" id="right_hold" class="form-control form-control-alternative" placeholder="Sec">
+                  </div>
+                </div>
+                <div class="col-lg-2">
+                  <div class="form-group">
+                    <label class="form-control-label" for="input-country">Returnable</label>
+                    <div class="custom-control custom-control-alternative custom-checkbox" style="padding-top: 0.5rem;">
+                      <input class="custom-control-input" id="right_return" type="checkbox">
+                      <label class="custom-control-label" for="right_return">
+                        <span class="text-muted">Return</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <hr class="my-4" />
+            <!-- Description -->
+            <h6 class="heading-small text-muted mb-4">Motion List</h6>
+            <div class="pl-lg-4">
+              <div class="form-group">
+                <div class="table-responsive table_pattern_items">
+                  <table id="tb_items" class="table align-items-center table-flush">
+                    <thead class="thead-light">
+                      <tr>
+                        <th scope="col">(L)Direction</th>
+                        <th scope="col">(L)Angle</th>
+                        <th scope="col">(L)Speed</th>
+                        <th scope="col">(L)Holding</th>
+                        <th scope="col">(L)Returnable</th>
+                        <th scope="col">(R)Direction</th>
+                        <th scope="col">(R)Angle</th>
+                        <th scope="col">(R)Speed</th>
+                        <th scope="col">(R)Holding</th>
+                        <th scope="col">(R)Returnable</th>
+                        <th scope="col"></th>
+                      </tr>
+                    </thead>
+                    <tbody id="tbd_items">                 
+                    </tbody>
+                  </table>
+                  <div id="nofity_item_cnt" style="color: #b5b5b5; text-align: center; padding: 0.5em;  font-size: 13px;">
+                    설정된 패턴 항목이 없습니다.
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
         </div>
-      </footer>
+      </div>
     </div>
   </div>
-  <!--   Core   -->
-  <script src="/js/plugins/jquery/dist/jquery.min.js"></script>
-  <script src="/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-  <!--   Optional JS   -->
-  <!--   Argon JS   -->
-  <script src="/js/argon-dashboard.min.js?v=1.1.2"></script>
-  <script src="/js/argon-dashboard.min.js?v=1.1.2"></script>
-  <script src="/js/my-pattern.js"></script>
-  <script>
-    window.TrackJS &&
-      TrackJS.install({
-        token: "ee6fab19c5a04ac1a32a645abde4613a",
-        application: "argon-dashboard-free"
-      });
+  <!-- Footer -->
+  <footer class="footer">
+    <div class="row align-items-center justify-content-xl-between">
+      <div class="col-xl-6">
+        <div class="copyright text-center text-xl-left text-muted">
+          &copy; 2020 <a href="https://www.creative-tim.com" class="font-weight-bold ml-1" target="_blank">알씨스쾌어</a>
+        </div>
+      </div>
 
-      setAccessInfos(<%- JSON.stringify(session) %>);
-  </script>
+    </div>
+  </footer>
+</div>
+</div>
+<!--   Core   -->
+<script src="/js/plugins/jquery/dist/jquery.min.js"></script>
+<script src="/js/plugins/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<!--   Optional JS   -->
+<!--   Argon JS   -->
+<script src="/js/argon-dashboard.min.js?v=1.1.2"></script>
+<script src="/js/argon-dashboard.min.js?v=1.1.2"></script>
+<script src="/js/my-pattern.js"></script>
+<script>
+  window.TrackJS &&
+  TrackJS.install({
+    token: "ee6fab19c5a04ac1a32a645abde4613a",
+    application: "argon-dashboard-free"
+  });
+
+  setAccessInfos(<%- JSON.stringify(session) %>);
+</script>
 </body>
 
 </html>

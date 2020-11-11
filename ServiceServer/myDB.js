@@ -26,8 +26,33 @@ const SQL_CT_HOSPITALs = "CREATE TABLE IF NOT EXISTS hospital ( " +
 "name VARCHAR(30) NOT NULL, " +
 "pwd VARCHAR(30) NOT NULL);";
 
+const SQL_CT_PATTERNs = "CREATE TABLE IF NOT EXISTS pattern ( " +
+"pCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+"pName VARCHAR(20) NOT NULL, " +
+"hCode INT NOT NULL, " +
+"hName VARCHAR(20) NOT NULL, " +
+"keyword VARCHAR(250) NOT NULL, " +
+"explanation VARCHAR(250) NOT NULL, " +
+"addDate VARCHAR(20) NOT NULL, " +
+"lastDate VARCHAR(20), " +
+"totalTime VARCHAR(20) NOT NULL);"; 
+
+const SQL_CT_HOSPITAL_PATTERNs = "CREATE TABLE IF NOT EXISTS hospitalPattern ( " +
+"pCode INT NOT NULL, " +
+"pName VARCHAR(20) NOT NULL, " +
+"hCode INT NOT NULL, " +
+"keyword VARCHAR(250) NOT NULL);"; 
+
+
+const SQL_CT_PATTERN_ITEMs = "CREATE TABLE IF NOT EXISTS patternItem ( " +
+"pCode INT NOT NULL, " +
+"_order INT NOT NULL, " +
+"leftMove VARCHAR(30) NOT NULL, " +
+"rightMove VARCHAR(30) NOT NULL);"; 
+
 const SQL_CT_USERs = "CREATE TABLE IF NOT EXISTS user ( " +
 "uCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
+"hCode INT NOT NULL, " +
 "name VARCHAR(10) NOT NULL, " +
 "phone VARCHAR(20) NOT NULL);";
 
@@ -40,18 +65,6 @@ const SQL_CT_SCHEDULEs = "CREATE TABLE IF NOT EXISTS schedule ( " +
 "dateTime VARCHAR(20) NOT NULL, " +
 "fulfill BOOLEAN NOT NULL DEFAULT FALSE);"; 
 
-const SQL_CT_PATTERNs = "CREATE TABLE IF NOT EXISTS pattern ( " +
-"pCode INT NOT NULL AUTO_INCREMENT PRIMARY KEY, " +
-"pName VARCHAR(20) NOT NULL, " +
-"hCode INT NOT NULL, " +
-"hName VARCHAR(20) NOT NULL, " +
-"keyword VARCHAR(250) NOT NULL);"; 
-
-const SQL_CT_PATTERN_DETAIL = "CREATE TABLE IF NOT EXISTS pattern_detail ( " +
-"pCode INT NOT NULL, " +
-"_order INT NOT NULL, " +
-"leftMove VARCHAR(30) NOT NULL, " +
-"rightMove VARCHAR(30) NOT NULL);"; 
 
 let dbPool = mysql.createPool(dbConfig);
 
@@ -59,11 +72,12 @@ module.exports.init = () => {
   initDB().then(async()=>{
     try{
       const db = dbPool.promise();
-      await db.query(SQL_CT_HOSPITALs);    
+      await db.query(SQL_CT_HOSPITALs);   
+      await db.query(SQL_CT_PATTERNs);     
+      await db.query(SQL_CT_HOSPITAL_PATTERNs);    
+      await db.query(SQL_CT_PATTERN_ITEMs);    
       await db.query(SQL_CT_USERs);    
       await db.query(SQL_CT_SCHEDULEs);  
-      await db.query(SQL_CT_PATTERNs);    
-      await db.query(SQL_CT_PATTERN_DETAIL);   
     }catch(err){
       console.log(err);
     }   
@@ -156,9 +170,11 @@ module.exports.select = (table, params, target, option) => {
       sql += "*";
     }
     sql += " FROM " + table;
+    console.log(target);
     if(target){
       const name = Object.keys(target)[0];
-      sql += " WHERE " + name + " = '"  + target[name] + "'";
+      if(name != undefined)
+        sql += " WHERE " + name + " = '"  + target[name] + "'";
     }
 
     console.log(sql);

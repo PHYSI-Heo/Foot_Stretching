@@ -25,4 +25,17 @@ public class SystemEnv {
             }
         }
     }
+
+    public static String getDirectionStr(String key){
+        switch (key){
+            case "1":
+                return "Up";
+            case "2":
+                return "Down";
+            case "3":
+                return "Left";
+            default:
+                return "Right";
+        }
+    }
 }

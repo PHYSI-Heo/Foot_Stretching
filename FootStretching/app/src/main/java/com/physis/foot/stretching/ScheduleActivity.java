@@ -3,6 +3,7 @@ package com.physis.foot.stretching;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.annotation.SuppressLint;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -15,6 +16,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.physis.foot.stretching.data.HospitalInfo;
 import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.data.ScheduleInfo;
 import com.physis.foot.stretching.data.UserInfo;
@@ -48,6 +50,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     private UserAdapter userAdapter;
     private ScheduleAdapter scheduleAdapter;
     private PatternAdapter patternAdapter;
+    private MyAlertDialog myAlertDialog;
 
     private List<ScheduleInfo> scheduleInfos = new LinkedList<>();
 
@@ -75,7 +78,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
                 case HttpPacket.GET_USERs_URL:
                     setUserList(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
                     break;
-                case HttpPacket.GET_PATTERNs_URL:
+                case HttpPacket.GET_MY_PATTERNs_URL:
                     setPatternList(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
                     break;
                 case HttpPacket.GET_SCHEDULEs_URL:
@@ -111,10 +114,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     @Override
     public void onSelectUser(UserInfo info) {
         selectedUserInfo = info;
-        if(info != null) {
-            getUserSchedules(info.getCode());
-
-        }
+        getUserSchedules(info.getCode());
     }
 
     @Override
@@ -151,6 +151,20 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
                         startStretchingActivity(info);
                     }
                 });
+    }
+
+
+    private void updateUserInfo(String code, String name, String phone) throws JSONException {
+        if(name == null || name.length() == 0 || phone == null || phone.length() == 0){
+            Toast.makeText(getApplicationContext(), "사용자 이름 / 전화번호를 입력하세요.", Toast.LENGTH_SHORT).show();
+            return;
+        }
+
+        JSONObject params = new JSONObject();
+        params.put(HttpPacket.PARAMS_USER_CODE, code);
+        params.put(HttpPacket.PARAMS_USER_NAME, name);
+        params.put(HttpPacket.PARAMS_USER_PHONE, phone);
+        requestAPI(HttpPacket.UPDATE_USER_INFO_URL, params);
     }
 
     private void startStretchingActivity(ScheduleInfo info){
@@ -195,7 +209,7 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
         }
 
         CalendarDay calendarDay = mcvCalender.getSelectedDate();
-        selectedDate = calendarDay.getYear() + "-" + calendarDay.getMonth() + "-" + calendarDay.getDay();
+        selectedDate = calendarDay.getYear() + "-" + (calendarDay.getMonth() + 1) + "-" + calendarDay.getDay();
 
         JSONObject params = new JSONObject();
         try {
@@ -273,7 +287,13 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     }
 
     private void getPatterList(){
-        requestAPI(HttpPacket.GET_PATTERNs_URL);
+        JSONObject params = new JSONObject();
+        try {
+            params.put(HttpPacket.PARAMS_HOSPITAL_CODE, HospitalInfo.getInstance().getCode());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        requestAPI(HttpPacket.GET_MY_PATTERNs_URL, params);
     }
 
     private void setUserList(JSONArray rows) {
@@ -295,7 +315,13 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     }
 
     private void getUserList(){
-        requestAPI(HttpPacket.GET_USERs_URL);
+        JSONObject params = new JSONObject();
+        try {
+            params.put(HttpPacket.PARAMS_HOSPITAL_CODE, HospitalInfo.getInstance().getCode());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        requestAPI(HttpPacket.GET_USERs_URL, params);
         LoadingDialog.show(ScheduleActivity.this, "Get Users..");
     }
 

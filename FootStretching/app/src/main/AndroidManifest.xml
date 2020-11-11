@@ -2,6 +2,7 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.physis.foot.stretching">
 
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_COARSE_LOCATION" />
     <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
@@ -17,7 +18,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".ManagerActivity"></activity>
+        <activity android:name=".UserSetupActivity"></activity>
+        <activity android:name=".LoginActivity" />
+        <activity android:name=".ManagerActivity" />
         <activity android:name=".MemberUserActivity" />
         <activity android:name=".SimpleUserActivity" />
         <activity
@@ -36,8 +39,7 @@
             </intent-filter>
         </activity>
 
-        <service
-            android:name=".ble.BluetoothLEService"/>
+        <service android:name=".ble.BluetoothLEService" />
     </application>
 
 </manifest>

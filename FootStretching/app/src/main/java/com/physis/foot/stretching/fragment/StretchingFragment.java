@@ -83,7 +83,6 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_start_move:
-                getPatternItems();
                 break;
             case R.id.btn_stop_move:
 
@@ -91,26 +90,6 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
         }
     }
 
-    @Override
-    protected void onHttpResponse(String url, JSONObject resObj) {
-        super.onHttpResponse(url, resObj);
-        try {
-            switch (url){
-                case HttpPacket.GET_PATTERN_ITEMs_URL:
-                    setPatternItems(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
-                    if(patternItemInfos.size() == 0){
-                        Toast.makeText(getActivity(), "등록된 운동패턴 정보가 없습니다.", Toast.LENGTH_SHORT).show();
-                        return;
-                    }else{
-                        connectBoard(); // connect ble
-                    }
-                    break;
-                default:
-            }
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
 
     @SuppressLint("SetTextI18n")
     @Override
@@ -160,23 +139,5 @@ public class StretchingFragment extends MyBaseFragment implements View.OnClickLi
             }
         }
     }
-
-    private void getPatternItems(){
-        if(patternCode == null)
-            return;
-
-        picLeft.initInfo();
-        picRight.initInfo();
-
-        JSONObject params = new JSONObject();
-        try {
-            params.put(HttpPacket.PARAMS_PATTERN_CODE, patternCode);
-            requestAPI(HttpPacket.GET_PATTERN_ITEMs_URL, params);
-            LoadingDialog.show(getActivity(), "Ready tp Pattern Exercise..");
-        } catch (JSONException e) {
-            e.printStackTrace();
-        }
-    }
-
 
 }

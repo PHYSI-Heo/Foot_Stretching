@@ -8,9 +8,17 @@ const db = require('../myDB');
 
 router.post('/register', async(req, res)=>{
 	var resObj = {};
-	try{
-		resObj.rows = await db.insert("user", req.body);		
-		resObj.result = 1001;
+	try{		
+		let sRes = await db.select("user", 
+			null, 
+			{"phone" : req.body.phone}, 
+			null);
+		if(sRes.length == 0){
+			resObj.rows = await db.insert("user", req.body);		
+			resObj.result = 1001;
+		}else{
+			resObj.result = 1104;
+		}	
 	}catch(err){
 		resObj.result = err.errno;
 		resObj.err = err.code;
@@ -25,7 +33,7 @@ router.post('/list', async(req, res)=>{
 	try{
 		resObj.rows = await db.select("user", 
 			null, 
-			null, 
+			req.body, 
 			null);
 		resObj.result = 1001;
 	}catch(err){

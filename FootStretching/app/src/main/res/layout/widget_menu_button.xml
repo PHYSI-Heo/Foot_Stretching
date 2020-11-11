@@ -3,7 +3,7 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:id="@+id/menu_btn_frame"
-    android:background="@drawable/bg_menu_btn"
+    android:background="@drawable/bg_white_round"
     xmlns:tools="http://schemas.android.com/tools">
 
     <TextView
@@ -33,9 +33,8 @@
             android:layout_width="match_parent"
             android:layout_height="0px"
             android:layout_weight="1"
-            android:textColor="@android:color/black"
-            android:textSize="22sp"
-            android:textStyle="bold"
+            android:textColor="#345BDB"
+            android:textSize="18sp"
             android:paddingTop="8dp"
             android:gravity="center_horizontal"
             tools:text="Button Name"/>

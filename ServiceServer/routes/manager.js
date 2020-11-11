@@ -5,6 +5,25 @@ module.exports = router;
 const fs = require('fs');
 const db = require('../myDB');
 
+const masterEmail = "admin@admin.com";
+
+function selectHospitalEmail(target) {
+	return new Promise(async(resolve, reject)=>{  
+		var resObj = {};
+		try{
+			resObj.rows = await db.select("hospital", 
+				null,
+				target,
+				null);
+			resObj.result = 1001;
+		}catch(err){
+			resObj.result = err.errno;
+			resObj.err = err.code;
+		} 
+		resolve(resObj);   
+	});
+}
+
 
 // 
 // 		Login Manager
@@ -14,19 +33,9 @@ router.get('/auth/login', (req, res) => {
 });
 
 router.post('/auth/login', async (req, res) => {
-	var resObj = {};
-	try{
-		let target = {"email" : req.body.email};
-		resObj.rows = await db.select("hospital", 
-			null,
-			target,
-			null);
-		resObj.result = 1001;
-	}catch(err){
-		resObj.result = err.errno;
-		resObj.err = err.code;
-	}
-
+	let target = {"email" : req.body.email};
+	var resObj = await selectHospitalEmail(target);
+	
 	if(resObj.rows.length == 0){
 		resObj.result = 1102;
 	}else if(resObj.rows[0].pwd != req.body.pwd){		
@@ -56,18 +65,8 @@ router.get('/auth/signup', (req, res) => {
 });
 
 router.post('/auth/signup', async (req, res) => {
-	var resObj = {};
-	try{
-		let target = {"email" : req.body.email};
-		resObj.rows = await db.select("hospital", 
-			null,
-			target,
-			null);
-		resObj.result = 1001;
-	}catch(err){
-		resObj.result = err.errno;
-		resObj.err = err.code;
-	}
+	let target = {"email" : req.body.email};
+	var resObj = await selectHospitalEmail(target);
 
 	if(resObj.rows.length != 0){
 		resObj.result = 1101;
@@ -95,11 +94,14 @@ router.get('/dashboard/index', (req, res) => {
 });
 
 
+
+
 router.get('/dashboard/my/pattern', (req, res) => {
 	res.render('myPattern', 
 	{
 		session : req.session
 	});
 });
+
 
 

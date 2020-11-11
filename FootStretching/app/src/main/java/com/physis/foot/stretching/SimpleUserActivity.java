@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.TextView;
 
+import com.physis.foot.stretching.data.HospitalInfo;
 import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.dialog.LoadingDialog;
 import com.physis.foot.stretching.fragment.StretchingFragment;
@@ -43,7 +44,7 @@ public class SimpleUserActivity extends HttpAsyncTaskActivity implements Pattern
         super.onHttpResponse(url, resObj);
         LoadingDialog.dismiss();
         try {
-            if(url.equals(HttpPacket.GET_PATTERNs_URL)) {
+            if(url.equals(HttpPacket.GET_MY_PATTERNs_URL)) {
                 setPatternList(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
             }
         } catch (JSONException e) {
@@ -80,7 +81,13 @@ public class SimpleUserActivity extends HttpAsyncTaskActivity implements Pattern
     }
 
     private void getPatterList(){
-        requestAPI(HttpPacket.GET_PATTERNs_URL);
+        JSONObject params = new JSONObject();
+        try {
+            params.put(HttpPacket.PARAMS_HOSPITAL_CODE, HospitalInfo.getInstance().getCode());
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+        requestAPI(HttpPacket.GET_MY_PATTERNs_URL, params);
         LoadingDialog.show(SimpleUserActivity.this, "Get Patterns..");
     }
 
