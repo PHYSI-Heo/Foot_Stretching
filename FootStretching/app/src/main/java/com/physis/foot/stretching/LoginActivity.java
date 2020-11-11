@@ -58,7 +58,7 @@ public class LoginActivity extends HttpAsyncTaskActivity implements View.OnClick
             JSONObject obj = resObj.getJSONArray(HttpPacket.PARAMS_ROWS).getJSONObject(0);
             HospitalInfo.getInstance().setInfo(
                     obj.getString(HttpPacket.PARAMS_HOSPITAL_CODE),
-                    obj.getString(HttpPacket.PARAMS_HOSPITAL_NAME)
+                    obj.getString(HttpPacket.PARAMS_NAME)
             );
         } catch (JSONException e) {
             e.printStackTrace();

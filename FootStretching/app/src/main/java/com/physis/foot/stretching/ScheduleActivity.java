@@ -50,7 +50,6 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
     private UserAdapter userAdapter;
     private ScheduleAdapter scheduleAdapter;
     private PatternAdapter patternAdapter;
-    private MyAlertDialog myAlertDialog;
 
     private List<ScheduleInfo> scheduleInfos = new LinkedList<>();
 

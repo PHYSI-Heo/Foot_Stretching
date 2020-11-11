@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/layout_pattern_data"
+    android:padding="8dp"
+    android:layout_marginHorizontal="4dp"
+    android:layout_marginVertical="2dp">
+
+    <TextView
+        android:id="@+id/tv_pattern_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        tools:text="Pattern Name"
+        android:textColor="@color/colorAccent"
+        android:textStyle="bold"/>
+
+    <TextView
+        android:id="@+id/tv_sub_info"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/tv_pattern_name"
+        android:layout_marginStart="16dp"
+        tools:text="( Hospital Name / Run Time )"/>
+
+    <TextView
+        android:id="@+id/tv_explanation"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/tv_pattern_name"
+        android:textSize="14sp"
+        android:maxLines="1"
+        android:textColor="@android:color/darker_gray"
+        tools:text="explanation"/>
+
+</RelativeLayout>

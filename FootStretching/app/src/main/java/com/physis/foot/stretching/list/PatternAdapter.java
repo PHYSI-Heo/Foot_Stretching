@@ -97,14 +97,14 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> impleme
             }
         });
 
-        holder.itemFrame.setOnLongClickListener(new View.OnLongClickListener() {
-            @Override
-            public boolean onLongClick(View view) {
-                if(listener != null)
-                    listener.onEditPattern(info);
-                return false;
-            }
-        });
+//        holder.itemFrame.setOnLongClickListener(new View.OnLongClickListener() {
+//            @Override
+//            public boolean onLongClick(View view) {
+//                if(listener != null)
+//                    listener.onEditPattern(info);
+//                return false;
+//            }
+//        });
     }
 
     @Override
