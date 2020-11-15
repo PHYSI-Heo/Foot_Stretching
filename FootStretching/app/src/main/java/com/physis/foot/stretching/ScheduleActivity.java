@@ -172,7 +172,8 @@ public class ScheduleActivity extends HttpAsyncTaskActivity implements UserAdapt
                 .putExtra(HttpPacket.PARAMS_USER_PHONE, selectedUserInfo.getPhone())
                 .putExtra(HttpPacket.PARAMS_DATE_TIME, info.getDateTime())
                 .putExtra(HttpPacket.PARAMS_PATTERN_NAME, info.getPatternName())
-                .putExtra(HttpPacket.PARAMS_PATTERN_CODE, info.getPatternCode()));
+                .putExtra(HttpPacket.PARAMS_PATTERN_CODE, info.getPatternCode())
+                .putExtra(HttpPacket.PARAMS_NO, info.getNo()));
     }
 
     private void deleteSchedule(){

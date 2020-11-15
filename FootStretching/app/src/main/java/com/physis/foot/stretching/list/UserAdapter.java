@@ -19,9 +19,6 @@ import java.util.List;
 
 public class UserAdapter extends RecyclerView.Adapter<UserHolder> implements Filterable {
 
-    public static final int USER_SCHEDULE = 1;
-    public static final int USER_EDIT_INFO = 2;
-
     public interface OnSelectedUserListener{
         void onSelectUser(UserInfo info);
     }

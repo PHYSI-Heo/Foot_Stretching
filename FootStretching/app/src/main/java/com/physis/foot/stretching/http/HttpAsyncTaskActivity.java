@@ -23,6 +23,12 @@ public class HttpAsyncTaskActivity extends AppCompatActivity {
         requester.execute();
     }
 
+    protected void requestAPI(String url){
+        HttpAsyncTask requester = new HttpAsyncTask(url, null);
+        requester.setOnResponseListener(responseListener);
+        requester.execute();
+    }
+
 
     final HttpAsyncTask.OnResponseListener responseListener = new HttpAsyncTask.OnResponseListener() {
         @Override

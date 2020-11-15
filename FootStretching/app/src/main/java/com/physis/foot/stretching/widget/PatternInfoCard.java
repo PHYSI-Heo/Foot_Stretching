@@ -46,11 +46,11 @@ public class PatternInfoCard extends RelativeLayout {
 
         String dir = infos[0].equals("1") ? "Up" : (infos[0].equals("2") ? "Down" : infos[0].equals("3") ? "Left" : "Right");
 
-        tvDirAngle.setText("Direction > " + dir + " ( " + SystemEnv.getAnglePhaseValue(infos[0], infos[1]) + "° )");
-        tvMovingSpeed.setText("Moving Speed > " + infos[3]);
-        tvHoldingTime.setText("Holding Time > " + infos[4]);
+        tvDirAngle.setText("Direction > " + dir + " ( " + infos[1] + " ° )");
+        tvMovingSpeed.setText("Moving Speed > " + infos[2]);
+        tvHoldingTime.setText("Holding Time > " + infos[3]);
 
-        ivReturnIcon.setBackgroundResource(infos[2].equals("0") ? R.drawable.ic_return_disable : R.drawable.ic_return_enable);
+        ivReturnIcon.setBackgroundResource(infos[4].equals("0") ? R.drawable.ic_return_disable : R.drawable.ic_return_enable);
     }
 
     @SuppressLint("SetTextI18n")

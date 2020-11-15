@@ -27,6 +27,7 @@ public class MemberUserActivity extends HttpAsyncTaskActivity {
 
     private StretchingFragment fragment;
     private String patternCode;
+    private String scheduleNo;
 
     private List<PatternItemInfo> patternItemInfoList = new LinkedList<>();
     private MotionItemAdapter motionItemAdapter;
@@ -47,6 +48,9 @@ public class MemberUserActivity extends HttpAsyncTaskActivity {
             switch (url){
                 case HttpPacket.GET_PATTERN_ITEMs_URL:
                     setPatternItems(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
+                    break;
+                case HttpPacket.UPDATE_SCHEDULE_URL:
+                    Toast.makeText(getApplicationContext(), "운통 일정이 종료되었습니다.", Toast.LENGTH_SHORT).show();
                     break;
                 default:
             }
@@ -74,6 +78,7 @@ public class MemberUserActivity extends HttpAsyncTaskActivity {
             }
         }
         motionItemAdapter.setItems(patternItemInfoList);
+        fragment.setPatternItems(patternItemInfoList);
     }
 
     private void getPatternItems(){
@@ -90,14 +95,24 @@ public class MemberUserActivity extends HttpAsyncTaskActivity {
         }
     }
 
+    public void setScheduleState(){
+        JSONObject params = new JSONObject();
+        try {
+            params.put(HttpPacket.PARAMS_NO, scheduleNo);
+            params.put(HttpPacket.PARAMS_FULFILL, true);
+            requestAPI(HttpPacket.UPDATE_SCHEDULE_URL, params);
+            LoadingDialog.show(this, "Get pattern item list..");
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+    }
 
     private void init() {
-        fragment = new StretchingFragment();
+        fragment = StretchingFragment.newInstance(StretchingFragment.FRAGMENT_USER);
         FragmentTransaction fragmentTransaction = getSupportFragmentManager().beginTransaction();
         fragmentTransaction.replace(R.id.frame_layout, fragment).commit();
 
         patternCode = getIntent().getStringExtra(HttpPacket.PARAMS_PATTERN_CODE);
-        fragment.setPatternCode(patternCode);
 
         TextView tvUserName = findViewById(R.id.tv_user_name);
         tvUserName.setText(getIntent().getStringExtra(HttpPacket.PARAMS_USER_NAME));
@@ -114,5 +129,7 @@ public class MemberUserActivity extends HttpAsyncTaskActivity {
         RecyclerView reMotions = findViewById(R.id.rc_motions);
         reMotions.setLayoutManager(layoutManager);
         reMotions.setAdapter(motionItemAdapter = new MotionItemAdapter());
+
+        scheduleNo = getIntent().getStringExtra(HttpPacket.PARAMS_NO);
     }
 }

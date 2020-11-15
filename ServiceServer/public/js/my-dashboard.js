@@ -6,11 +6,16 @@ var fileterPatterns;
 var myPatterns;
 
 function setAccessInfos(session) {
-   mCode = session.code;
-   mName = session.name;
-   console.log("Session : " + mCode + ", " + mName);
+	mCode = session.code;
+	mName = session.name;
+	console.log("Session : " + mCode + ", " + mName);
 
-    setSignContent();
+	setSignContent();
+	getTotalPatterns(); 
+
+	if(mCode != undefined){
+		getMyPattern();
+	}
 }
 
 function setSignContent() {
@@ -423,9 +428,7 @@ function addItemRow(item) {
 	$('#tbd_detail_pattern').append($tr);
 }
 
-$(document).ready(function() {
-	getTotalPatterns(); 	
-	getMyPattern();
+$(document).ready(function() {	
 
 	$('#btn_all_pattern').on('click', function() {
 		$('#search_keyword').val("");

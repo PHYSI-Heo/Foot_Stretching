@@ -13,6 +13,10 @@ function setAccessInfos(session) {
 	console.log("Session : " + mCode + ", " + mName);
 
 	setSignContent();
+
+	if(mCode != undefined){
+		getMyPattern();
+	}
 }
 
 function setSignContent() {
@@ -365,8 +369,6 @@ function deletePattern() {
 
 
 $(document).ready(function() {
-	getMyPattern();
-
 	$('#btn_item_setup').on('click', function() {
 		if(mCode != undefined){
 			setItemInfo();

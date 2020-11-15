@@ -4,8 +4,9 @@ import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.annotation.SuppressLint;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -17,13 +18,12 @@ import com.physis.foot.stretching.data.HospitalInfo;
 import com.physis.foot.stretching.data.PatternInfo;
 import com.physis.foot.stretching.data.PatternItemInfo;
 import com.physis.foot.stretching.dialog.LoadingDialog;
-import com.physis.foot.stretching.dialog.MyAlertDialog;
+import com.physis.foot.stretching.helper.SwipeAndDragHelper;
 import com.physis.foot.stretching.http.HttpAsyncTaskActivity;
 import com.physis.foot.stretching.http.HttpPacket;
 import com.physis.foot.stretching.list.MotionItemAdapter;
 import com.physis.foot.stretching.list.PatternAdapter;
-import com.physis.foot.stretching.list.PatternItemAdapter;
-import com.physis.foot.stretching.widget.PatternSetter;
+import com.physis.foot.stretching.list.PatternDataAdapter;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -32,13 +32,13 @@ import org.json.JSONObject;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnClickListener, PatternAdapter.OnSelectedPatternListener {
+public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnClickListener, PatternDataAdapter.OnSelectedPatternDataListener {
 
     private static final String TAG = ManagerActivity.class.getSimpleName();
 
-    private EditText etSearchPattern;
     private TextView tvNotifyPattern, tvNotifyPatternItem, tvNotifyMyPattern;
 
+    private PatternDataAdapter patternDataAdapter;
     private PatternAdapter myPatternAdapter;
     private MotionItemAdapter motionItemAdapter;
 
@@ -72,13 +72,8 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
                 case HttpPacket.GET_MY_PATTERNs_URL:
                     setMyPatternList(resObj.getJSONArray(HttpPacket.PARAMS_ROWS));
                     break;
-                case HttpPacket.UPDATE_PATTERN_URL:
+                case HttpPacket.SET_MY_PATTERNs_URL:
                     Toast.makeText(getApplicationContext(), "패턴운동 정보가 갱신되었습니다.", Toast.LENGTH_SHORT).show();
-                    getPatterList();
-                    break;
-                case HttpPacket.UPDATE_PATTERN_ITEMs_URL:
-                    Toast.makeText(getApplicationContext(), "패턴운동 항목이 설정되었습니다.", Toast.LENGTH_SHORT).show();
-                    getPatternItems(selectedPattern.getCode());
                     break;
             }
         } catch (JSONException e) {
@@ -87,23 +82,62 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
     }
 
     @Override
-    public void onSelectedPattern(PatternInfo info) {
-        selectedPattern = info;
-        getPatternItems(info.getCode());
+    public void onSelected(int type, PatternInfo info) {
+//        Log.e(TAG, "Selected Pattern Code : " + info.getCode());
+        if(type == PatternDataAdapter.PATTERN_DETAIL){
+            getPatternItems(info.getCode());
+        }else{
+            appMyPattern(info);
+        }
     }
-
-    @Override
-    public void onEditPattern(PatternInfo info) {
-
-    }
-
 
     @Override
     public void onClick(View view) {
         switch (view.getId()){
             case R.id.btn_setup:
+                updateMyPatterns();
                 break;
         }
+    }
+
+    private void updateMyPatterns(){
+        JSONObject params = new JSONObject();
+        JSONArray paramList = new JSONArray();
+        String hospitalCode = HospitalInfo.getInstance().getCode();
+        for(PatternInfo info : myPatternList){
+            JSONObject param = new JSONObject();
+            try {
+                param.put(HttpPacket.PARAMS_PATTERN_CODE, info.getCode());
+                param.put(HttpPacket.PARAMS_PATTERN_NAME, info.getName());
+                param.put(HttpPacket.PARAMS_HOSPITAL_CODE, hospitalCode);
+                param.put(HttpPacket.PARAMS_PATTERN_KEYWORD, info.getKeyword());
+                paramList.put(param);
+                params.put(HttpPacket.PARAMS_ITEMs, paramList);
+            } catch (JSONException e) {
+                e.printStackTrace();
+            }
+        }
+        requestAPI(HttpPacket.SET_MY_PATTERNs_URL, params);
+        LoadingDialog.show(ManagerActivity.this, "Update my patterns..");
+    }
+
+    private void appMyPattern(PatternInfo info){
+        int pos = -1;
+        for (int i = 0; i < myPatternList.size(); i++){
+            if(myPatternList.get(i).getCode().equals(info.getCode()))
+            {
+                pos = i;
+                break;
+            }
+        }
+
+        if(pos != -1){
+            Toast.makeText(getApplicationContext(), "이미 등록된 패턴정보 입니다.", Toast.LENGTH_SHORT).show();
+        }else{
+            myPatternList.add(info);
+        }
+        tvNotifyMyPattern.setVisibility(myPatternList.size() == 0 ? View.VISIBLE : View.GONE);
+        myPatternAdapter.setItems(myPatternList);
     }
 
 
@@ -117,6 +151,7 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
                         obj.getString(HttpPacket.PARAMS_PATTERN_NAME),
                         obj.getString(HttpPacket.PARAMS_PATTERN_KEYWORD)
                 ));
+//                Log.e(TAG, "My Pattern Code : " + obj.getString(HttpPacket.PARAMS_PATTERN_CODE));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
@@ -178,25 +213,24 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
                         obj.getString(HttpPacket.PARAMS_HOSPITAL_NAME),
                         obj.getString(HttpPacket.PARAMS_PATTERN_RUN_TIME)
                 ));
+                Log.e(TAG, "Keyword : " + obj.getString(HttpPacket.PARAMS_PATTERN_KEYWORD));
             } catch (JSONException e) {
                 e.printStackTrace();
             }
         }
         tvNotifyPattern.setVisibility(patternInfoList.size() == 0 ? View.VISIBLE : View.GONE);
-        patternAdapter.setItems(patternInfoList);
+        patternDataAdapter.setItems(patternInfoList);
     }
 
     private void getPatterList(){
         patternInfoList.clear();
         patternItemInfoList.clear();
         selectedPattern = null;
-        requestAPI(HttpPacket.GET_PATTERN_URL, (JSONObject) null);
+        requestAPI(HttpPacket.GET_PATTERN_URL);
         LoadingDialog.show(ManagerActivity.this, "Get patterns..");
     }
 
     private void init() {
-        etSearchPattern = findViewById(R.id.et_search_pattern);
-
         Button btnSetup = findViewById(R.id.btn_setup);
         btnSetup.setOnClickListener(this);
 
@@ -205,9 +239,9 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
         layoutManager1.setItemPrefetchEnabled(true);
         RecyclerView rvPatterns = findViewById(R.id.rv_patterns);
         rvPatterns.setLayoutManager(layoutManager1);
-        
-        rvPatterns.setAdapter(patternAdapter = new PatternAdapter());
-        patternAdapter.setOnSelectedPatternListener(this);
+        rvPatterns.setAdapter(patternDataAdapter = new PatternDataAdapter());
+        patternDataAdapter.setOnSelectedPatternDataListener(this);
+
 
         LinearLayoutManager layoutManager2 = new LinearLayoutManager(getApplicationContext());
         layoutManager2.setOrientation(LinearLayoutManager.VERTICAL);
@@ -223,10 +257,33 @@ public class ManagerActivity extends HttpAsyncTaskActivity implements View.OnCli
         RecyclerView rvMyPattern = findViewById(R.id.rv_my_patterns);
         rvMyPattern.setLayoutManager(layoutManager3);
         rvMyPattern.setAdapter(myPatternAdapter = new PatternAdapter());
+        // Set Drag & Drop
+        SwipeAndDragHelper swipeAndDragHelper = new SwipeAndDragHelper(myPatternAdapter);
+        ItemTouchHelper touchHelper = new ItemTouchHelper(swipeAndDragHelper);
+        myPatternAdapter.setTouchHelper(touchHelper);
+        touchHelper.attachToRecyclerView(rvMyPattern);
 
         tvNotifyPattern = findViewById(R.id.tv_notify_pattern);
         tvNotifyPatternItem = findViewById(R.id.tv_notify_pattern_item);
         tvNotifyMyPattern = findViewById(R.id.tv_notify_my_pattern);
+
+        EditText etSearchPattern = findViewById(R.id.et_search_pattern);
+        etSearchPattern.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                patternDataAdapter.getFilter().filter(charSequence);
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
     }
 
 }

@@ -2,8 +2,8 @@ package com.physis.foot.stretching.http;
 
 public class HttpPacket {
 
-//    public static final String BASEURL = "http://192.168.1.12:3000";
-    public static final String BASEURL = "http://192.168.219.105:3000";
+    public static final String BASEURL = "http://192.168.1.12:3000";
+//    public static final String BASEURL = "http://192.168.219.105:3000";
 
     /*
             API
@@ -11,6 +11,7 @@ public class HttpPacket {
     public static final String MANAGER_LOGIN_URL = BASEURL + "/manager/auth/login";
     public static final String REGISTER_USER_URL = BASEURL + "/user/register";
     public static final String GET_MY_PATTERNs_URL = BASEURL + "/pattern/hospital/list";
+    public static final String SET_MY_PATTERNs_URL = BASEURL + "/pattern/hospital/setting";
 
     public static final String GET_USERs_URL = BASEURL + "/user/list";
     public static final String UPDATE_USER_INFO_URL = BASEURL + "/user/update/info";
@@ -39,6 +40,7 @@ public class HttpPacket {
     public static final String PARAMS_EMAIL = "email";
     public static final String PARAMS_PWD = "pwd";
     public static final String PARAMS_NAME = "name";
+    public static final String PARAMS_ITEMs = "items";
 
     public static final String PARAMS_HOSPITAL_CODE = "hCode";
     public static final String PARAMS_HOSPITAL_NAME = "hName";

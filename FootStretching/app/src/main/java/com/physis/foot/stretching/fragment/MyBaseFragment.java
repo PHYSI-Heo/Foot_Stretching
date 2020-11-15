@@ -26,7 +26,7 @@ public class MyBaseFragment extends Fragment {
     public static final String HM_10_CONF = "0000ffe0-0000-1000-8000-00805f9b34fb";
     public static final String HM_RX_TX = "0000ffe1-0000-1000-8000-00805f9b34fb";
 
-    public static final String DEVICE_ADDRESS = "A8:1B:6A:9F:64:C0";
+    public static final String DEVICE_ADDRESS = "20:C3:8F:8A:02:0C";
 
     protected BluetoothLEManager bleManager = BluetoothLEManager.getInstance(getActivity());
     private BluetoothDevice targetDevice = null;
@@ -74,7 +74,7 @@ public class MyBaseFragment extends Fragment {
     };
 
     protected void sendControlMessage(String msg){
-        bleManager.writeCharacteristic("$" + msg + "#");
+        bleManager.writeCharacteristic(msg);
     }
 
     protected void onReceiveAck(String msg){
@@ -90,6 +90,7 @@ public class MyBaseFragment extends Fragment {
         if(bleManager.isConnected()){
             onReadyToDevice();
         }else{
+            LoadingDialog.show(getActivity(), "족부운동기구와 연결중입니다.");
             targetDevice = null;
             bleManager.scan(true, true);
         }

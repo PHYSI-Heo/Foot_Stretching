@@ -7,16 +7,25 @@ import android.widget.Filter;
 import android.widget.Filterable;
 
 import androidx.annotation.NonNull;
+import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.physis.foot.stretching.R;
 import com.physis.foot.stretching.data.PatternInfo;
+import com.physis.foot.stretching.data.PatternItemInfo;
+import com.physis.foot.stretching.helper.SwipeAndDragHelper;
 import com.physis.foot.stretching.list.holder.DualLineHolder;
 
+import java.util.Collections;
 import java.util.LinkedList;
 import java.util.List;
 
-public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> implements Filterable {
+public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> implements Filterable, SwipeAndDragHelper.OnActionCompletionContract {
+
+    private ItemTouchHelper touchHelper;
+    public void setTouchHelper(ItemTouchHelper touchHelper) {
+        this.touchHelper = touchHelper;
+    }
 
     public interface OnSelectedPatternListener{
         void onSelectedPattern(PatternInfo info);
@@ -35,6 +44,12 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> impleme
 
     private int selectedPosition = -1;
     private int oldPosition = -1;
+
+    private boolean clickable = true;
+
+    public void setItemClickable(boolean clickable){
+        this.clickable = clickable;
+    }
 
     @Override
     public Filter getFilter() {
@@ -75,7 +90,7 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> impleme
     }
 
     @Override
-    public void onBindViewHolder(@NonNull DualLineHolder holder, final int position) {
+    public void onBindViewHolder(@NonNull final DualLineHolder holder, final int position) {
         final PatternInfo info = filteredPatterns.get(position);
 
         holder.tvMainLine.setText(info.getName());
@@ -87,16 +102,24 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> impleme
         holder.itemFrame.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if(selectedPosition == position)
-                    return;
-
-                setSelectedPosition(position);
-
-                if(listener != null)
+                if(listener != null && clickable){
+                    if(selectedPosition == position)
+                        return;
+                    setSelectedPosition(position);
                     listener.onSelectedPattern(info);
+                }
             }
         });
 
+
+        holder.itemFrame.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view) {
+                if(touchHelper != null && clickable)
+                    touchHelper.startDrag(holder);
+                return false;
+            }
+        });
 //        holder.itemFrame.setOnLongClickListener(new View.OnLongClickListener() {
 //            @Override
 //            public boolean onLongClick(View view) {
@@ -110,6 +133,18 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> impleme
     @Override
     public int getItemCount() {
         return filteredPatterns.size();
+    }
+
+    @Override
+    public void onViewMoved(int oldPosition, int newPosition) {
+        Collections.swap(originalPatterns, oldPosition, newPosition);
+        notifyItemMoved(oldPosition, newPosition);
+    }
+
+    @Override
+    public void onViewSwiped(int position) {
+        originalPatterns.remove(position);
+        notifyItemRemoved(position);
     }
 
     private void setSelectedPosition(int position){
@@ -140,4 +175,10 @@ public class PatternAdapter extends RecyclerView.Adapter<DualLineHolder> impleme
 
         setSelectedPosition(position);
     }
+
+    public List<PatternInfo> getItems(){
+        return originalPatterns;
+    }
+
+
 }

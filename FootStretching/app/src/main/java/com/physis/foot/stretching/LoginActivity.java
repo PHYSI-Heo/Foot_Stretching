@@ -39,7 +39,7 @@ public class LoginActivity extends HttpAsyncTaskActivity implements View.OnClick
     protected void onHttpResponse(String url, JSONObject resObj) {
         super.onHttpResponse(url, resObj);
         if(url.equals(HttpPacket.MANAGER_LOGIN_URL)){
-            Toast.makeText(this, "관리자 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "관리자 로그인에 성공하였습니다.", Toast.LENGTH_SHORT).show();
             setHospitalInfo(resObj);
             startActivity(new Intent(LoginActivity.this, MainActivity.class));
             finish();
@@ -79,7 +79,7 @@ public class LoginActivity extends HttpAsyncTaskActivity implements View.OnClick
             e.printStackTrace();
         }
         requestAPI(HttpPacket.MANAGER_LOGIN_URL, params);
-        LoadingDialog.show(this, "Manager Login..");
+        LoadingDialog.show(LoginActivity.this, "Manager Login..");
     }
 
 

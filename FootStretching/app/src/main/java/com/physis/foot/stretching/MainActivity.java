@@ -68,7 +68,7 @@ public class MainActivity extends HttpAsyncTaskActivity implements View.OnClickL
             case R.id.mbtn_simple_user:
                 startActivity(new Intent(this, SimpleUserActivity.class));
                 break;
-            case R.id.iv_btn_set_pattern:
+            case R.id.mbtn_pattern_setting:
                 startActivity(new Intent(this, ManagerActivity.class));
                 break;
         }
@@ -87,8 +87,8 @@ public class MainActivity extends HttpAsyncTaskActivity implements View.OnClickL
         MenuButton mbtnSimpleUser = findViewById(R.id.mbtn_simple_user);
         mbtnSimpleUser.setOnClickListener(this);
 
-        ImageView iBtnPatternSetup = findViewById(R.id.iv_btn_set_pattern);
-        iBtnPatternSetup.setOnClickListener(this);
+        MenuButton mbtnSetMyPattern = findViewById(R.id.mbtn_pattern_setting);
+        mbtnSetMyPattern.setOnClickListener(this);
 
         TextView tvHospitalName = findViewById(R.id.tv_hospital_name);
         tvHospitalName.setText(HospitalInfo.getInstance().getName());

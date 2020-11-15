@@ -151,7 +151,14 @@ router.post('/hospital/list', async(req, res)=>{
 
 
 router.post('/hospital/setting', async(req, res)=>{
-	var items = JSON.parse(req.body.items);
+	console.log(IsJsonString(req.body.items));
+	var items;
+	if(IsJsonString(req.body.items)){
+		items = JSON.parse(req.body.items);
+	}else{
+		items = req.body.items;
+	}
+
 	var resObj = {};
 	try{
 		await db.delete("hospitalPattern", 
@@ -171,6 +178,14 @@ router.post('/hospital/setting', async(req, res)=>{
 
 
 
+function IsJsonString(obj) {
+  try {
+    var json = JSON.parse(obj);
+    return (typeof json === 'object');
+  } catch (e) {
+    return false;
+  }
+}
 
 
 
